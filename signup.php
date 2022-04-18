@@ -26,14 +26,14 @@
 	<div class="main-w3layouts wrapper">
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<h1>LOGIN FORM</h1>
+				<h1>SIGN-UP FORM</h1>
 				<form action="#" method="post">
 
 					<input class="text email" type="text" name="name" placeholder="Name" required="">
 					<input class="text" type="text" name="position" placeholder="Position" required="">
 					<input class="text email" type="email" name="email" placeholder="Email" required="">
 					<input class="text" type="password" name="password" placeholder="Password" required="">
-					<input type="submit" value="LOGIN">
+					<input type="submit" value="SIGN-UP">
 				</form>
 				<p>Wait the approval of your account. Thank You!</p>
 			</div>
