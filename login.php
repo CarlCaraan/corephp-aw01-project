@@ -14,7 +14,8 @@
 		}
 	</script>
 	<!-- Custom Theme files -->
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="resources/css/custom.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- //Custom Theme files -->
 	<!-- web font -->
 	<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
@@ -26,6 +27,7 @@
 	<div class="main-w3layouts wrapper">
 		<div class="main-agileinfo">
 			<div class="agileits-top">
+				<img class="auth-image" src="resources/img/login.png" alt="">
 				<h1>LOGIN FORM</h1>
 				<form action="#" method="post">
 

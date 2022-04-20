@@ -1,7 +1,7 @@
 <?php
-require 'config/connect.php';
+require 'app/config/connect.php';
 //login, register handler
-require 'auth/register_handler.php';
+require 'app/controllers/auth/register_handler.php';
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +21,8 @@ require 'auth/register_handler.php';
 		}
 	</script>
 	<!-- Custom Theme files -->
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="resources/css/custom.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- //Custom Theme files -->
 	<!-- web font -->
 	<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
@@ -33,6 +34,7 @@ require 'auth/register_handler.php';
 	<div class="main-w3layouts wrapper">
 		<div class="main-agileinfo">
 			<div class="agileits-top">
+				<img class="auth-image" src="resources/img/login.png" alt="">
 				<h1>SIGN-UP FORM</h1>
 				<form action="signup.php" method="POST">
 					<input class="text" type="text" name="reg_fname" placeholder="First Name" value="<?php if (isset($_SESSION['reg_fname'])) { //Start the SESSION to remain users input

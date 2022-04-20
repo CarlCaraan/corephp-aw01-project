@@ -1,0 +1,8 @@
+.auth-image {
+    margin: 0 auto;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-block: 2rem;
+}
