@@ -27,7 +27,7 @@
 	<div class="main-w3layouts wrapper">
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<img class="auth-image" src="resources/img/login.png" alt="">
+				<img class="auth-image center" src="resources/img/login.png" alt="">
 				<h1>LOGIN FORM</h1>
 				<form action="#" method="post">
 

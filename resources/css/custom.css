@@ -1,8 +1,15 @@
-.auth-image {
-    margin: 0 auto;
+/* === GLOBAL CLASS === */
+
+.center {
     text-align: center;
     align-items: center;
     display: flex;
     justify-content: center;
+}
+
+/* === LOGIN and REGISTER === */
+
+.auth-image {
+    margin: 0 auto;
     padding-block: 2rem;
 }

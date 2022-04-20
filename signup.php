@@ -34,7 +34,7 @@ require 'app/controllers/auth/register_handler.php';
 	<div class="main-w3layouts wrapper">
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<img class="auth-image" src="resources/img/login.png" alt="">
+				<img class="auth-image center" src="resources/img/login.png" alt="">
 				<h1>SIGN-UP FORM</h1>
 				<form action="signup.php" method="POST">
 					<input class="text" type="text" name="reg_fname" placeholder="First Name" value="<?php if (isset($_SESSION['reg_fname'])) { //Start the SESSION to remain users input
