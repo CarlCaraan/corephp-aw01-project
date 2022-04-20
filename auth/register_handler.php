@@ -7,6 +7,7 @@ $password = "";
 $position = "";
 $date = "";
 $error_array = array();
+$status = "no";
 
 //-- Start Register Button --//
 if (isset($_POST['register_button'])) {
@@ -101,11 +102,11 @@ if (isset($_POST['register_button'])) {
 
         //Insert Data to database
         $query = mysqli_query($con, "INSERT INTO users VALUES (
-			'', '$first_name', '$last_name', '$username', '$email', '$password', '$position', '$date'
+			'', '$first_name', '$last_name', '$username', '$email', '$password', '$position', '$status', '$date'
 		)");
 
         //Register Successful Message
-        array_push($error_array, "<span>You're all set! Go ahead and login!</span><br>");
+        array_push($error_array, "<span>Wait the approval of your account. Thank You!</span><br>");
 
         //Clear Session Variables
         $_SESSION['reg_fname'] = "";

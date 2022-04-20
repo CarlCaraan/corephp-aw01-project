@@ -71,8 +71,9 @@ require 'auth/register_handler.php';
 					else if (in_array("Your password must be between 5 and 30 characters<br>", $error_array)) echo "Your password must be between 5 and 30 characters<br>"; ?>
 					<input type="submit" value="SIGN-UP" name="register_button">
 				</form>
-				<?php if (in_array("<span>You're all set! Go ahead and login!</span><br>", $error_array)) echo "<span>You're all set! Go ahead and login!</span><br>"; ?>
-				<p>Wait the approval of your account. Thank You!</p>
+				<?php if (in_array("<span>Wait the approval of your account. Thank You!</span><br>", $error_array)) echo "<span>Wait the approval of your account. Thank You!</span><br>"; ?>
+				<!-- <p>Wait the approval of your account. Thank You!</p><br> -->
+				<p>Already have an Account? <a href="login.php"> SIGN IN!</a></p>
 			</div>
 		</div>
 		<!-- copyright -->
