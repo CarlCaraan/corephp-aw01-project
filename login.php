@@ -1,5 +1,14 @@
+<?php
+require 'app/config/connect.php';
+//login, register handler
+require 'app/controllers/auth/register_handler.php';
+require 'app/controllers/auth/login_handler.php';
+?>
+
+
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Creative Colorlib SignUp Form</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,11 +38,18 @@
 			<div class="agileits-top">
 				<img class="auth-image center" src="resources/img/login.png" alt="">
 				<h1>LOGIN FORM</h1>
-				<form action="#" method="post">
+				<form action="login.php" method="POST">
+					<input class="text email" type="email" name="log_email" placeholder="Email" required="" value="<?php
+																													if (isset($_SESSION['log_email'])) { //Start the SESSION to remain users input
+																														echo $_SESSION['log_email'];
+																													} ?>">
+					<input class="text" type="password" name="log_password" placeholder="Password" required=""><br />
 
-					<input class="text email" type="email" name="email" placeholder="Email" required="">
-					<input class="text" type="password" name="password" placeholder="Password" required="">
-					<input type="submit" value="LOGIN">
+					<?php if (in_array("Email or password was incorrect<br>", $error_array)) echo "Email or password was incorrect<br>"; ?>
+					<?php if (in_array("Your account is not yet approved!<br>", $error_array)) echo "Your account is not yet approved!<br>"; ?>
+					<?php if (in_array("Your account have been rejected!<br>", $error_array)) echo "Your account have been rejected!<br>"; ?>
+
+					<input type="submit" name="login_button" value="LOGIN">
 				</form>
 				<p>Don't have an Account? <a href="signup.php"> SIGN UP!</a></p>
 			</div>
