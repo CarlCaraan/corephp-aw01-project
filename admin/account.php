@@ -26,9 +26,9 @@
 </head>
 
 <body>
-  <?php
-  $toggle_active = "account";
-  ?>
+    <?php
+    $toggle_active = "account";
+    ?>
 
     <!-- Left Panel -->
     <?php

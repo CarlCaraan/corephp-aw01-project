@@ -29,6 +29,7 @@
     <?php
     $toggle_active = "dashboard";
     ?>
+
     <!-- Left Panel -->
     <?php
     include "./body/sidebar.php"

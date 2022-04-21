@@ -61,11 +61,11 @@
 </head>
 
 <body>
-
     <?php
     $toggle = "show";
     $toggle_active = "customer";
     ?>
+
     <!-- Left Panel -->
     <?php
     include "./body/sidebar.php"
