@@ -226,7 +226,7 @@
                             </div><br />
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary btn-sm" style="">
+                                <button type="submit" class="btn btn-primary btn-sm">
                                     <i class="fa fa-save"></i> Save
                                 </button>
                                 <button type="reset" class="btn btn-danger btn-sm">
