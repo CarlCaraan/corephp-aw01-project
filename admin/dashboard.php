@@ -1,3 +1,8 @@
+<?php
+require("../app/config/connect.php");
+?>
+
+
 <!doctype html>
 <html class="no-js" lang="en">
 
