@@ -32,7 +32,6 @@ include("../app/controllers/flash_message.php")
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="../resources/css/toastr.min.css">
 
-
 </head>
 
 <body>
