@@ -103,7 +103,6 @@ include("../app/controllers/admin_backend/flash_message.php")
                                             </div>
                                         </div>
 
-
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
                                                 <a href="#"> Email:
@@ -210,10 +209,7 @@ include("../app/controllers/admin_backend/flash_message.php")
                                     </button>
                                 </div>
                                 <div class="modal-body">
-
-
                                     <p align="center">Are you sure? You want to approved this Account?</p>
-
                                     <div class="modal-footer">
                                         <a href="../app/controllers/admin_backend/Account/approve_handler.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary">YES</a>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
@@ -236,10 +232,7 @@ include("../app/controllers/admin_backend/flash_message.php")
                                     </button>
                                 </div>
                                 <div class="modal-body">
-
-
                                     <p align="center">Are you sure? You want to Reject this Account?</p>
-
                                     <div class="modal-footer">
                                         <a href="../app/controllers/admin_backend/Account/reject_handler.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary">YES</a>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
