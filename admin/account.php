@@ -73,7 +73,6 @@ include("../app/controllers/admin_backend/flash_message.php")
         </div>
 
         <div class="content mt-3">
-
             <?php
             $sql = "SELECT * FROM users";
             $result = $con->query($sql);
@@ -99,6 +98,7 @@ include("../app/controllers/admin_backend/flash_message.php")
                                                         <?php echo $row['last_name']; ?>
                                                     </h4>
                                                     <p><?php echo $row['position']; ?></p>
+                                                    <p>Joined: <?php echo $row['signup_date']; ?></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -230,7 +230,7 @@ include("../app/controllers/admin_backend/flash_message.php")
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="mediumModalLabel">Approved Account</h5>
+                                    <h5 class="modal-title" id="mediumModalLabel">Reject Account</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -256,16 +256,13 @@ include("../app/controllers/admin_backend/flash_message.php")
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="mediumModalLabel">Approved Account</h5>
+                                    <h5 class="modal-title" id="mediumModalLabel">Delete Account</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-
-
                                     <p align="center">Are you sure? You want to Delete this Account?</p>
-
                                     <div class="modal-footer">
                                         <a href="../app/controllers/admin_backend/Account/delete_handler.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary">YES</a>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
