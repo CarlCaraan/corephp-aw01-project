@@ -14,6 +14,7 @@ if (isset($_SESSION['username'])) {
     header("Location: ../login");
 }
 
+//Authorized for Admin only
 if (!defined('USERSITE')) {
     header("refresh:0;url=../app/controllers/auth/logout_handler.php");
     die();
