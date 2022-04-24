@@ -216,7 +216,7 @@ include("../app/controllers/admin_backend/flash_message.php")
 
                                     <div class="modal-footer">
                                         <a href="../app/controllers/admin_backend/Account/approve_handler.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary">YES</a>
-                                        <a href="" class="btn btn-danger">NO</a>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
                                     </div>
                                 </div>
 
