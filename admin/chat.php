@@ -1,5 +1,6 @@
 <?php
 require("../app/config/connect.php");
+include("../classes/User.php");
 ?>
 
 <!doctype html>
