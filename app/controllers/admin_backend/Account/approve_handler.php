@@ -1,6 +1,6 @@
 <?php
 require_once '../../../config/connect.php';
-include '../flash_message.php';
+include '../../flash_message.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];

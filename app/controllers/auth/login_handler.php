@@ -8,15 +8,11 @@ if (isset($_POST['login_button'])) {
     $check_database_query = mysqli_query($con, "SELECT * FROM users WHERE email='$email' AND password='$password'");
     $check_login_query = mysqli_num_rows($check_database_query);
 
-    // Verify Status
-    $check_status_query = mysqli_query($con, "SELECT status FROM users");
-    $row = mysqli_fetch_array($check_status_query);
+    // Verify Status and Position
+    $check_data_query = mysqli_query($con, "SELECT * FROM users WHERE email='$email'");
+    $row = mysqli_fetch_array($check_data_query);
     $status = $row['status'];
-
-    // Verify Position
-    $check_position = mysqli_query($con, "SELECT position FROM users");
-    $get_postion = mysqli_fetch_array($check_position);
-    $position = $get_postion['position'];
+    $position = $row['position'];
 
     if ($status == "Pending") {
         array_push($error_array, "Your account is not yet approved!<br>");

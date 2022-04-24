@@ -5,8 +5,18 @@ if (isset($_SESSION['username'])) {
     //$user is to select all data from users table
     $user_details_query = mysqli_query($con, "SELECT * FROM users WHERE username='$userLoggedIn'");
     $user = mysqli_fetch_array($user_details_query);
+
+    //Authorized for Admin only
+    if ($user["position"] == "Admin") {
+        define('USERSITE', true);
+    }
 } else {
     header("Location: ../login");
+}
+
+if (!defined('USERSITE')) {
+    header("refresh:0;url=../app/controllers/auth/logout_handler.php");
+    die();
 }
 ?>
 
