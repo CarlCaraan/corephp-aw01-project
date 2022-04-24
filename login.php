@@ -38,7 +38,7 @@ require 'app/controllers/auth/login_handler.php';
 			<div class="agileits-top">
 				<img class="auth-image center" src="resources/img/login.png" alt="">
 				<h1>LOGIN FORM</h1>
-				<form action="login.php" method="POST">
+				<form action="login" method="POST">
 					<input class="text email" type="email" name="log_email" placeholder="Email" required="" value="<?php
 																													if (isset($_SESSION['log_email'])) { //Start the SESSION to remain users input
 																														echo $_SESSION['log_email'];
@@ -51,7 +51,7 @@ require 'app/controllers/auth/login_handler.php';
 
 					<input type="submit" name="login_button" value="LOGIN">
 				</form>
-				<p>Don't have an Account? <a href="signup.php"> SIGN UP!</a></p>
+				<p>Don't have an Account? <a href="signup"> SIGN UP!</a></p>
 			</div>
 		</div>
 		<!-- copyright -->

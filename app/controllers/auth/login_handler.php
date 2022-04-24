@@ -27,21 +27,21 @@ if (isset($_POST['login_button'])) {
         $username = $row['username'];
         $_SESSION['username'] = $username;
 
-        header("Location: admin/dashboard.php");
+        header("Location: admin/dashboard");
         exit();
     } else if ($check_login_query == 1 && $position == "Branch Manager") { //Login query
         $row = mysqli_fetch_array($check_database_query);
         $username = $row['username'];
         $_SESSION['username'] = $username;
 
-        header("Location: branch_manager/dashboard.php");
+        header("Location: branch_manager/dashboard");
         exit();
     } else if ($check_login_query == 1 && $position == "Staff") { //Login query
         $row = mysqli_fetch_array($check_database_query);
         $username = $row['username'];
         $_SESSION['username'] = $username;
 
-        header("Location: staff/dashboard.php");
+        header("Location: staff/dashboard");
         exit();
     } else {
         array_push($error_array, "Email or password was incorrect<br>");

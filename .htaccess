@@ -1,0 +1,12 @@
+ReWriteEngine On
+
+RewriteRule ^signup?$ /corephp-aw01-project/signup.php [L]
+RewriteRule ^login?$ /corephp-aw01-project/login.php [L]
+RewriteRule ^admin/dashboard?$ /corephp-aw01-project/admin/dashboard.php [L]
+RewriteRule ^admin/profile?$ /corephp-aw01-project/admin/profile.php [L]
+RewriteRule ^admin/chat?$ /corephp-aw01-project/admin/chat.php [L]
+RewriteRule ^admin/account?$ /corephp-aw01-project/admin/account.php [L]
+RewriteRule ^admin/add_costumer?$ /corephp-aw01-project/admin/add_costumer.php [L]
+RewriteRule ^admin/atm?$ /corephp-aw01-project/admin/atm.php [L]
+RewriteRule ^admin/sps?$ /corephp-aw01-project/admin/sps.php [L]
+RewriteRule ^admin/spsv1?$ /corephp-aw01-project/admin/spsv1.php [L]

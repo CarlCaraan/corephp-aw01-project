@@ -36,7 +36,7 @@ require 'app/controllers/auth/register_handler.php';
 			<div class="agileits-top">
 				<img class="auth-image center" src="resources/img/login.png" alt="">
 				<h1>SIGN-UP FORM</h1>
-				<form action="signup.php" method="POST">
+				<form action="signup" method="POST">
 					<input class="text" type="text" name="reg_fname" placeholder="First Name" value="<?php if (isset($_SESSION['reg_fname'])) { //Start the SESSION to remain users input
 																											echo $_SESSION['reg_fname'];
 																										} ?>" required>
@@ -75,7 +75,7 @@ require 'app/controllers/auth/register_handler.php';
 				</form>
 				<?php if (in_array("<span>Wait the approval of your account. Thank You!</span><br>", $error_array)) echo "<span>Wait the approval of your account. Thank You!</span><br>"; ?>
 				<!-- <p>Wait the approval of your account. Thank You!</p><br> -->
-				<p>Already have an Account? <a href="login.php"> SIGN IN!</a></p>
+				<p>Already have an Account? <a href="login"> SIGN IN!</a></p>
 			</div>
 		</div>
 		<!-- copyright -->
