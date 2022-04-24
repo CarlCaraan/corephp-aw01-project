@@ -1,6 +1,7 @@
 <?php
 require("../app/config/connect.php");
 include("../classes/User.php");
+include("../app/controllers/admin_backend/flash_message.php")
 ?>
 
 <!doctype html>
@@ -27,6 +28,10 @@ include("../classes/User.php");
     <link rel="stylesheet" href="assets/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="../resources/css/toastr.min.css">
+
 
 </head>
 
@@ -69,182 +74,216 @@ include("../classes/User.php");
 
         <div class="content mt-3">
 
+            <?php
+            $sql = "SELECT * FROM users";
+            $result = $con->query($sql);
 
-            <div class="col-sm-6 col-lg-3">
-                <div class="card text-white bg-flat-color-1">
-                    <div class="card-body pb-0">
+            if ($result->num_rows > 0) {
+                // output data of each row
+                while ($row = $result->fetch_assoc()) {
+            ?>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card text-white bg-flat-color-1">
+                            <div class="card-body pb-0">
 
-                        <aside class="profile-nav alt">
-                            <section class="card">
-                                <div class="card-header user-header alt bg-dark">
-                                    <div class="media">
-                                        <a href="#">
-                                            <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/admin.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <h4 class="text-light display-6">Jim Doe</h4>
-                                            <p>Project Manager</p>
+                                <aside class="profile-nav alt">
+                                    <section class="card">
+                                        <div class="card-header user-header alt bg-dark">
+                                            <div class="media">
+                                                <a href="#">
+                                                    <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/admin.jpg">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="text-light display-6">
+                                                        <?php echo $row['first_name']; ?>
+                                                        <?php echo $row['last_name']; ?>
+                                                    </h4>
+                                                    <p><?php echo $row['position']; ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">
+                                                <a href="#"> Email:
+                                                    <?php echo $row['email']; ?>
+                                                    <span class="badge badge-primary pull-right"></span>
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a href="#"> <i class="fa fa-tasks"></i> Account Status:
+                                                    <!-- <span class="badge badge-danger pull-right">15</span> -->
+                                                    <?php echo $row['status']; ?>
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <center>
+                                                    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['id'] ?>"><i class="fa fa-eye"></i> </button>
+                                                    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#approved<?php echo $row['id'] ?>"><i class="fa fa-check"></i></button>
+                                                    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reject<?php echo $row['id'] ?>"><i class="fa fa-times"></i></button>
+                                                    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="fa fa-trash"></i></button>
+                                                </center>
+                                            </li>
+                                        </ul>
+
+                                    </section>
+                                </aside>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- modal view -->
+                    <div class="modal fade" id="view<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Costumer Information</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-header">
+                                        <strong class="card-title">Personal Information</strong>
+                                    </div><br />
+                                    <div class="row">
+                                        <div class="col-sm-6">
+
+                                            <aside class="profile-nav alt">
+                                                <section class="card">
+                                                    <div class="card-header user-header alt bg-dark">
+                                                        <div class="media">
+                                                            <a href="#">
+                                                                <img class="align-self-center rounded-circle mr-3" style="width:125px; height:135px;" alt="" src="images/admin.jpg">
+                                                            </a>
+                                                            <div class="media-body">
+                                                                <h2 class="text-light display-6"><?php echo $row['first_name'] . " " . $row['last_name'] ?></h2>
+                                                                <p><?php echo $row['position'] ?><br />09304895235<br />Birthday</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </section>
+                                            </aside>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input id="p_address" name="p_address" type="text" class="form-control" value="<?php echo $row['email'] ?>" placeholder="Email Address" disabled><br />
+                                            <input id="p_address" name="p_address" type="text" class="form-control" value="" placeholder="Permanent Address" disabled><br />
+                                        </div>
+                                    </div>
+
+                                    <strong class="card-title">Company Information</strong>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label></label>
+                                            <input id="t_number" name="t_number" type="text" class="form-control" placeholder="Company Affiliated With" disabled>
+                                            <label></label>
+                                            <input id="status" name="status" type="text" class="form-control" placeholder="Company Address" disabled>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label></label>
+                                            <input id="age" name="age" type="text" class="form-control" placeholder="Company Contact Number" disabled>
+                                            <label></label>
+                                            <input id="gender" name="gender" type="text" class="form-control" placeholder="Work Status" disabled>
                                         </div>
                                     </div>
                                 </div>
 
-
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <a href="#"> Email Address <span class="badge badge-primary pull-right"></span></a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="#"> <i class="fa fa-tasks"></i> Permanent Address <span class="badge badge-danger pull-right">15</span></a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <center>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view"><i class="fa fa-eye"></i> </button>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#approved"><i class="fa fa-check"></i></button>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reject"><i class="fa fa-times"></i></button>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></button>
-                                        </center>
-                                    </li>
-                                </ul>
-
-                            </section>
-                        </aside>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- end modal view -->
 
-                </div>
-            </div>
-            <!--/.col-->
+                    <!-- modal approved -->
+                    <div class="modal fade" id="approved<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Approved Account</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
 
-            <div class="col-sm-6 col-lg-3">
-                <div class="card text-white bg-flat-color-1">
-                    <div class="card-body pb-0">
 
-                        <aside class="profile-nav alt">
-                            <section class="card">
-                                <div class="card-header user-header alt bg-dark">
-                                    <div class="media">
-                                        <a href="#">
-                                            <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/admin.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <h4 class="text-light display-6">Jim Doe</h4>
-                                            <p>Project Manager</p>
-                                        </div>
+                                    <p align="center">Are you sure? You want to approved this Account?</p>
+
+                                    <div class="modal-footer">
+                                        <a href="../app/controllers/admin_backend/Account/approve_handler.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary">YES</a>
+                                        <a href="" class="btn btn-danger">NO</a>
                                     </div>
                                 </div>
 
-
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <a href="#"> Email Address <span class="badge badge-primary pull-right"></span></a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="#"> Permanent Address <span class="badge badge-danger pull-right"></span></a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <center>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view"><i class="fa fa-eye"></i> </button>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#approved"><i class="fa fa-check"></i></button>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reject"><i class="fa fa-times"></i></button>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></button>
-                                        </center>
-                                    </li>
-                                </ul>
-
-                            </section>
-                        </aside>
+                            </div>
+                        </div>
                     </div>
+                    <!-- end modal approved -->
 
-                </div>
-            </div>
-            <!--/.col-->
+                    <!-- modal reject -->
+                    <div class="modal fade" id="reject<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Approved Account</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
 
-            <div class="col-sm-6 col-lg-3">
-                <div class="card text-white bg-flat-color-1">
-                    <div class="card-body pb-0">
 
-                        <aside class="profile-nav alt">
-                            <section class="card">
-                                <div class="card-header user-header alt bg-dark">
-                                    <div class="media">
-                                        <a href="#">
-                                            <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/admin.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <h4 class="text-light display-6">Jim Doe</h4>
-                                            <p>Project Manager</p>
-                                        </div>
+                                    <p align="center">Are you sure? You want to Reject this Account?</p>
+
+                                    <div class="modal-footer">
+                                        <a href="../app/controllers/admin_backend/Account/reject_handler.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary">YES</a>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
                                     </div>
                                 </div>
 
-
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <a href="#"> Email Address <span class="badge badge-primary pull-right"></span></a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="#"> Permanent Address <span class="badge badge-danger pull-right"></span></a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <center>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view"><i class="fa fa-eye"></i> </button>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#approved"><i class="fa fa-check"></i></button>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reject"><i class="fa fa-times"></i></button>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></button>
-                                        </center>
-                                    </li>
-                                </ul>
-
-                            </section>
-                        </aside>
+                            </div>
+                        </div>
                     </div>
+                    <!-- end modal reject -->
 
-                </div>
-            </div>
-            <!--/.col-->
+                    <!-- modal delete -->
+                    <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Approved Account</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
 
-            <div class="col-sm-6 col-lg-3">
-                <div class="card text-white bg-flat-color-1">
-                    <div class="card-body pb-0">
 
-                        <aside class="profile-nav alt">
-                            <section class="card">
-                                <div class="card-header user-header alt bg-dark">
-                                    <div class="media">
-                                        <a href="#">
-                                            <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/admin.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <h4 class="text-light display-6">Jim Doe</h4>
-                                            <p>Project Manager</p>
-                                        </div>
+                                    <p align="center">Are you sure? You want to Delete this Account?</p>
+
+                                    <div class="modal-footer">
+                                        <a href="../app/controllers/admin_backend/Account/delete_handler.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary">YES</a>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
                                     </div>
                                 </div>
 
-
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <a href="#"> Email Address <span class="badge badge-primary pull-right"></span></a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="#"> Permanent Address <span class="badge badge-danger pull-right"></span></a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <center>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view"><i class="fa fa-eye"></i> </button>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#approved"><i class="fa fa-check"></i></button>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reject"><i class="fa fa-times"></i></button>
-                                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i></button>
-                                        </center>
-                                    </li>
-                                </ul>
-
-                            </section>
-                        </aside>
+                            </div>
+                        </div>
                     </div>
+                    <!-- end modal delete -->
 
-                </div>
-            </div>
-            <!--/.col-->
+            <?php
+                }
+            } else {
+                echo "0 results";
+            }
+            $con->close();
+            ?>
 
         </div> <!-- .content -->
     </div><!-- /#right-panel -->
@@ -263,6 +302,24 @@ include("../classes/User.php");
     <script src="vendors/jqvmap/dist/jquery.vmap.min.js"></script>
     <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+
+    <!-- Toastr JS -->
+    <script src="../resources/js/toastr.min.js"></script>
+    <script>
+        <?php if (isset($_SESSION['success'])) : ?>
+            toastr.success("<?php echo flash('success'); ?>");
+        <?php endif ?>
+        <?php if (isset($_SESSION['error'])) : ?>
+            toastr.error("<?php echo flash('error'); ?>");
+        <?php endif ?>
+        <?php if (isset($_SESSION['warning'])) : ?>
+            toastr.warning("<?php echo flash('warning'); ?>");
+        <?php endif ?>
+        <?php if (isset($_SESSION['info'])) : ?>
+            toastr.info("<?php echo flash('info'); ?>");
+        <?php endif ?>
+    </script>
+
     <!-- <script>
         (function($) {
             "use strict";
@@ -282,149 +339,7 @@ include("../classes/User.php");
         })(jQuery);
     </script> -->
 
-    <!-- modal view -->
-    <div class="modal fade" id="view" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mediumModalLabel">Costumer Information</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="card-header">
-                        <strong class="card-title">Personal Information</strong>
-                    </div><br />
-                    <div class="row">
-                        <div class="col-sm-6">
-
-                            <aside class="profile-nav alt">
-                                <section class="card">
-                                    <div class="card-header user-header alt bg-dark">
-                                        <div class="media">
-                                            <a href="#">
-                                                <img class="align-self-center rounded-circle mr-3" style="width:125px; height:135px;" alt="" src="images/admin.jpg">
-                                            </a>
-                                            <div class="media-body">
-                                                <h2 class="text-light display-6">Jim Doe</h2>
-                                                <p>Project Manager <br />09304895235<br />Birthday</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </section>
-                            </aside>
-                        </div>
-                        <div class="col-sm-6">
-                            <input id="p_address" name="p_address" type="text" class="form-control" value="Email Address"><br />
-                            <input id="p_address" name="p_address" type="text" class="form-control" value="Permanent Address"><br />
-                            <input id="p_address" name="p_address" type="text" class="form-control" value="High Educational Attainment">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label></label>
-                            <input id="t_number" name="t_number" type="text" class="form-control" placeholder="Telephone/Mobile Number here!">
-                            <label></label>
-                            <input id="status" name="status" type="text" class="form-control" placeholder="Civil Status here!">
-                        </div>
-                        <div class="col-sm-6">
-                            <label></label>
-                            <input id="age" name="age" type="text" class="form-control" placeholder="Age here!">
-                            <label></label>
-                            <input id="gender" name="gender" type="text" class="form-control" placeholder="Gender here!">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end modal view -->
-
-    <!-- modal approved -->
-    <div class="modal fade" id="approved" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mediumModalLabel">Approved Account</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-
-                    <p align="center">Are you sure? You want to approved this Account?</p>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">YES</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- end modal approved -->
-
-    <!-- modal reject -->
-    <div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mediumModalLabel">Approved Account</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-
-                    <p align="center">Are you sure? You want to Reject this Account?</p>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">YES</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- end modal reject -->
-
-    <!-- modal deletet -->
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mediumModalLabel">Approved Account</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-
-                    <p align="center">Are you sure? You want to Delete this Account?</p>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">YES</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- end modal delete -->
-
+    <!-- start modal add -->
     <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -560,8 +475,7 @@ include("../classes/User.php");
             </div>
         </div>
     </div>
-    <!-- end modal delete -->
-
+    <!-- end modal add -->
 
 </body>
 
