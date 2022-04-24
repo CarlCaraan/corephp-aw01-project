@@ -17,7 +17,7 @@ if (isset($_POST['login_button'])) {
     if ($status == "Pending") {
         array_push($error_array, "Your account is not yet approved!<br>");
     } else if ($status == "Rejected") {
-        array_push($error_array, "Your account have been rejected!<br>");
+        array_push($error_array, "Your account has been rejected!<br>");
     } else if ($check_login_query == 1 && $position == "Admin") { //Login query
         $row = mysqli_fetch_array($check_database_query);
         $username = $row['username'];
