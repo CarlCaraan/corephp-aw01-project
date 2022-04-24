@@ -8,7 +8,7 @@ require 'app/controllers/auth/register_handler.php';
 <html>
 
 <head>
-	<title>Creative Colorlib SignUp Form</title>
+	<title>Sign Up | App</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script type="application/x-javascript">

@@ -1,10 +1,15 @@
+<?php
+require("../app/config/connect.php");
+include("../classes/User.php");
+?>
+
 <!doctype html>
 <html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>WEB AND DATABASE</title>
+    <title>Account | App</title>
     <meta name="description" content="WEB AND DATABASE">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

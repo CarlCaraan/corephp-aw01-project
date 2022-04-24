@@ -5,7 +5,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./"><img src="images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand" href="./"><img src="images/logo.png" alt="Logo">sd</a>
                 <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
             </div>
 
@@ -16,7 +16,8 @@
                                 } ?>">
                         <a href="../admin/dashboard.php"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
-                    <li class="menu-item-has-children dropdown <?php echo $toggle ?> <?php if ($toggle_active == "customer" || $toggle_active == "atm" || $toggle_active == "sps" || $toggle_active == "spsv1") { echo "active";
+                    <li class="menu-item-has-children dropdown <?php echo $toggle ?> <?php if ($toggle_active == "customer" || $toggle_active == "atm" || $toggle_active == "sps" || $toggle_active == "spsv1") {
+                                                                                            echo "active";
                                                                                         }  ?>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Customer</a>
                         <ul class="sub-menu children dropdown-menu <?php echo $toggle ?>">
