@@ -1,7 +1,6 @@
 <?php
 require("../app/config/connect.php");
 include("../classes/User.php");
-include("../app/controllers/flash_message.php")
 ?>
 
 <!doctype html>

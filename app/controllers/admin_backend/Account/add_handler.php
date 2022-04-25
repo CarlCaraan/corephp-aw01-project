@@ -41,11 +41,11 @@ if (isset($_POST['add_account'])) {
     //-- Validation Message --//
     if (strlen($first_name) > 25 || strlen($first_name) < 2) {
         $error_array = "1";
-        flash("error", "Your first name must be between 2 and 25 characters!");
+        flash("error", "First Name must be between 2 and 25 characters!");
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     } else if (strlen($last_name) > 25 || strlen($last_name) < 2) {
         $error_array = "1";
-        flash("error", "Your last name must be between 2 and 25 characters!");
+        flash("error", "Last Name must be between 2 and 25 characters!");
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     } else if (strlen($position) == 4) {
         $error_array = "1";

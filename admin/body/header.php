@@ -19,6 +19,9 @@ if (!defined('USERSITE')) {
     header("refresh:0;url=../app/controllers/auth/logout_handler.php");
     die();
 }
+
+// Flash Message
+include("../app/controllers/flash_message.php");
 ?>
 
 
@@ -117,7 +120,7 @@ if (!defined('USERSITE')) {
                 </a>
 
                 <div class="user-menu dropdown-menu">
-                    <a class="nav-link" href="./profile.php"><i class="fa fa-user"></i> My Profiles</a>
+                    <a class="nav-link" href="./profile"><i class="fa fa-user"></i> My Profiles</a>
 
                     <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
 
