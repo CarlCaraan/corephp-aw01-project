@@ -30,11 +30,6 @@ $error_array = "";
 
 
 if (isset($_POST['edit_profile'])) {
-    // $check_user_status = mysqli_query($con, "SELECT * FROM users WHERE username='$userLoggedIn'");
-    // $row = mysqli_fetch_array($check_user_status);
-    // $first_name = $row['first_name'];
-    // $last_name = $row['last_name'];
-    // $email = $row['email'];
 
     $first_name = strip_tags($_POST['first_name']);
     $last_name = strip_tags($_POST['last_name']);
