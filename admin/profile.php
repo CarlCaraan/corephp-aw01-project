@@ -116,6 +116,20 @@ include("../classes/User.php");
             <!--/.col-->
 
 
+
+            <?php
+            // Fetch User Table
+            $user_details_query = mysqli_query($con, "SELECT * FROM users WHERE username='$userLoggedIn'");
+            $user = mysqli_fetch_array($user_details_query);
+
+            $user_id = $user['id'];
+
+            // Fetch Personal Table
+            $personal_details_query = mysqli_query($con, "SELECT * FROM personal WHERE user_id='$user_id'");
+            $personal = mysqli_fetch_array($personal_details_query);
+            ?>
+
+
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body">
@@ -133,17 +147,17 @@ include("../classes/User.php");
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label for="first_name" class="control-label mb-1">First Name*</label>
-                                    <input id="first_name" name="first_name" type="text" class="form-control" placeholder="First Name" disabled>
+                                    <input id="first_name" name="first_name" type="text" class="form-control" placeholder="First Name" value="<?php echo $user['first_name']; ?>" disabled>
                                 </div>
 
                                 <div class="col-sm-3">
                                     <label for="last_name" class="control-label mb-1">Last Name*</label>
-                                    <input id="last_name" name="last_name" type="text" class="form-control" placeholder="Last Name" disabled>
+                                    <input id="last_name" name="last_name" type="text" class="form-control" placeholder="Last Name" value="<?php echo $user['last_name']; ?>" disabled>
                                 </div>
 
                                 <div class="col-sm-3">
                                     <label for="middle_name" class="control-label mb-1">Middle Name</label>
-                                    <input id="middle_name" name="middle_name" type="text" class="form-control" placeholder="Middle Name" disabled>
+                                    <input id="middle_name" name="middle_name" type="text" class="form-control" placeholder="Middle Name" value="<?php echo $personal['middle_name']; ?>" disabled>
                                 </div>
                                 <!--  <div class="col-sm-3">
                                               <label for="mname" class="control-label mb-1">Catteg</label>
@@ -154,9 +168,9 @@ include("../classes/User.php");
                                     <label for="category" class="control-label mb-1">Categories</label>
                                     <select name="category" id="category" class="form-control" disabled>
                                         <option value="0">Please select</option>
-                                        <option value="atm">ATM</option>
-                                        <option value="sps">SPS</option>
-                                        <option value="spsv1">SPSV1</option>
+                                        <option value="ATM" <?php echo ($personal['category']) == "ATM" ? "selected" : "" ?>>ATM</option>
+                                        <option value="SPS" <?php echo ($personal['category']) == "SPS" ? "selected" : "" ?>>SPS</option>
+                                        <option value="SPSV1" <?php echo ($personal['category']) == "SPSV1" ? "selected" : "" ?>>SPSV1</option>
                                     </select>
                                 </div>
 
@@ -166,45 +180,45 @@ include("../classes/User.php");
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="address" class="control-label mb-1">Permanent Address</label>
-                                    <input id="address" name="address" type="text" class="form-control" placeholder="Permanent Address" disabled>
+                                    <input id="address" name="address" type="text" class="form-control" placeholder="Permanent Address" value="<?php echo $personal['address']; ?>" disabled>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="email" class="control-label mb-1">Email Address</label>
-                                    <input id="email" name="email" type="text" class="form-control" placeholder="Email Address" disabled>
+                                    <input id="email" name="email" type="text" class="form-control" placeholder="Email Address" value="<?php echo $user['email']; ?>" disabled>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-sm-4">
                                     <label for="dob" class="control-label mb-1">Date of Birth</label>
-                                    <input id="dob" name="dob" type="text" class="form-control" placeholder="Birthday" disabled>
+                                    <input id="dob" name="dob" type="date" class="form-control" placeholder="Birthday" value="<?php echo $personal['dob']; ?>" disabled>
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="mobile" class="control-label mb-1">Telephone/Mobile Number</label>
-                                    <input id="mobile" name="mobile" type="text" class="form-control" placeholder="Telephone/Mobile Number " disabled>
+                                    <input id="mobile" name="mobile" type="text" class="form-control" placeholder="Telephone/Mobile Number" value="<?php echo $personal['mobile']; ?>" disabled>
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="card_number" class="control-label mb-1">ID Card Number</label>
-                                    <input id="card_number" name="card_number" type="text" class="form-control" placeholder="ID Card Number" disabled>
+                                    <input id="card_number" name="card_number" type="text" class="form-control" placeholder="ID Card Number" value="<?php echo $personal['card_number']; ?>" disabled>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="mother_name" class="control-label mb-1">Mother's Name</label>
-                                    <input id="mother_name" name="mother_name" type="text" class="form-control" placeholder="Mother's Name" disabled>
+                                    <input id="mother_name" name="mother_name" type="text" class="form-control" placeholder="Mother's Name" value="<?php echo $personal['mother_name']; ?>" disabled>
                                     <label for="father_name" class="control-label mb-1">Father's Name</label>
-                                    <input id="father_name" name="father_name" type="text" class="form-control" placeholder="Father's Name" disabled>
+                                    <input id="father_name" name="father_name" type="text" class="form-control" placeholder="Father's Name" value="<?php echo $personal['father_name']; ?>" disabled>
                                     <label for="spouse_name" class="control-label mb-1">Name of Spouse</label>
-                                    <input id="spouse_name" name="spouse_name" type="text" class="form-control" placeholder="Name of Spouse" disabled>
+                                    <input id="spouse_name" name="spouse_name" type="text" class="form-control" placeholder="Name of Spouse" value="<?php echo $personal['spouse_name']; ?>" disabled>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="contact_person" class="control-label mb-1">Contact Person</label>
-                                    <input id="contact_person" name="contact_person" type="text" class="form-control" placeholder="Contact Person" disabled>
+                                    <input id="contact_person" name="contact_person" type="text" class="form-control" placeholder="Contact Person" value="<?php echo $personal['contact_person']; ?>" disabled>
                                     <label for="contact_number" class="control-label mb-1">Contact Number</label>
-                                    <input id="contact_number" name="contact_number" type="text" class="form-control" placeholder="Contact Number" disabled>
+                                    <input id="contact_number" name="contact_number" type="text" class="form-control" placeholder="Contact Number" value="<?php echo $personal['contact_number']; ?>" disabled>
                                     <label for="s_contact_number" class="control-label mb-1">Spouse Contact Number</label>
-                                    <input id="s_contact_number" name="s_contact_number" type="text" class="form-control" placeholder="Spouse Contact Number" disabled>
+                                    <input id="s_contact_number" name="s_contact_number" type="text" class="form-control" placeholder="Spouse Contact Number" value="<?php echo $personal['s_contact_number']; ?>" disabled>
                                 </div>
                             </div><br />
 
@@ -214,26 +228,26 @@ include("../classes/User.php");
                             <div class="row">
                                 <div class="col-sm-4">
                                     <label for="company_affiliated" class="control-label mb-1">Company Affiliated With</label>
-                                    <input id="company_affiliated" name="company_affiliated" type="text" class="form-control" placeholder="Company Name" disabled>
+                                    <input id="company_affiliated" name="company_affiliated" type="text" class="form-control" placeholder="Company Affiliated With" value="<?php echo $personal['company_affiliated']; ?>" disabled>
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="company_address" class="control-label mb-1">Company Address</label>
-                                    <input id="company_address" name="company_address" type="text" class="form-control" placeholder="Company Address" disabled>
+                                    <input id="company_address" name="company_address" type="text" class="form-control" placeholder="Company Address" value="<?php echo $personal['company_address']; ?>" disabled>
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="company_number" class="control-label mb-1">Company Contact Number</label>
-                                    <input id="company_number" name="company_number" type="text" class="form-control" placeholder="Company Contact Number" disabled>
+                                    <input id="company_number" name="company_number" type="text" class="form-control" placeholder="Company Contact Number" value="<?php echo $personal['company_number']; ?>" disabled>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="position" class="control-label mb-1">Position/Occupation</label>
-                                    <input id="position" name="position" type="text" class="form-control" placeholder="Position Occupation" disabled>
+                                    <input id="position" name="position" type="text" class="form-control" placeholder="Position Occupation" value="<?php echo $personal['position']; ?>" disabled>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="work_status" class="control-label mb-1">Work Status</label>
-                                    <input id="work_status" name="work_status" type="text" class="form-control" placeholder="Work Status" disabled>
+                                    <input id="work_status" name="work_status" type="text" class="form-control" placeholder="Work Status" value="<?php echo $personal['work_status']; ?>" disabled>
                                 </div>
                             </div><br />
                         </form>
@@ -247,6 +261,9 @@ include("../classes/User.php");
             </div>
         </div>
         <!-- end content -->
+
+
+
 
         <!-- start modal add -->
         <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
@@ -266,17 +283,17 @@ include("../classes/User.php");
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label for="first_name" class="control-label mb-1">First Name*</label>
-                                    <input id="first_name" name="first_name" type="text" class="form-control" placeholder="First Name">
+                                    <input id="first_name" name="first_name" type="text" class="form-control" placeholder="First Name" value="<?php echo $user['first_name']; ?>">
                                 </div>
 
                                 <div class="col-sm-3">
                                     <label for="last_name" class="control-label mb-1">Last Name*</label>
-                                    <input id="last_name" name="last_name" type="text" class="form-control" placeholder="Last Name">
+                                    <input id="last_name" name="last_name" type="text" class="form-control" placeholder="Last Name" value="<?php echo $user['last_name']; ?>">
                                 </div>
 
                                 <div class="col-sm-3">
                                     <label for="middle_name" class="control-label mb-1">Middle Name</label>
-                                    <input id="middle_name" name="middle_name" type="text" class="form-control" placeholder="Middle Name">
+                                    <input id="middle_name" name="middle_name" type="text" class="form-control" placeholder="Middle Name" value="<?php echo $personal['middle_name']; ?>">
                                 </div>
                                 <!--  <div class="col-sm-3">
                                               <label for="mname" class="control-label mb-1">Catteg</label>
@@ -287,9 +304,9 @@ include("../classes/User.php");
                                     <label for="category" class="control-label mb-1">Categories</label>
                                     <select name="category" id="category" class="form-control">
                                         <option value="0">Please select</option>
-                                        <option value="atm">ATM</option>
-                                        <option value="sps">SPS</option>
-                                        <option value="spsv1">SPSV1</option>
+                                        <option value="ATM" <?php echo ($personal['category']) == "ATM" ? "selected" : "" ?>>ATM</option>
+                                        <option value="SPS" <?php echo ($personal['category']) == "SPS" ? "selected" : "" ?>>SPS</option>
+                                        <option value="SPSV1" <?php echo ($personal['category']) == "SPSV1" ? "selected" : "" ?>>SPSV1</option>
                                     </select>
                                 </div>
 
@@ -299,45 +316,45 @@ include("../classes/User.php");
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="address" class="control-label mb-1">Permanent Address</label>
-                                    <input id="address" name="address" type="text" class="form-control" placeholder="Permanent Address">
+                                    <input id="address" name="address" type="text" class="form-control" placeholder="Permanent Address" value="<?php echo $personal['address']; ?>">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="email" class="control-label mb-1">Email Address</label>
-                                    <input id="email" name="email" type="text" class="form-control" placeholder="Email Address">
+                                    <input id="email" name="email" type="text" class="form-control" placeholder="Email Address" value="<?php echo $user['email']; ?>">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-sm-4">
                                     <label for="dob" class="control-label mb-1">Date of Birth</label>
-                                    <input id="dob" name="dob" type="text" class="form-control" placeholder="Birthday">
+                                    <input id="dob" name="dob" type="date" class="form-control" placeholder="Birthday" value="<?php echo $personal['dob']; ?>">
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="mobile" class="control-label mb-1">Telephone/Mobile Number</label>
-                                    <input id="mobile" name="mobile" type="text" class="form-control" placeholder="Telephone/Mobile Number ">
+                                    <input id="mobile" name="mobile" type="text" class="form-control" placeholder="Telephone/Mobile Number" value="<?php echo $personal['mobile']; ?>">
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="card_number" class="control-label mb-1">ID Card Number</label>
-                                    <input id="card_number" name="card_number" type="text" class="form-control" placeholder="ID Card Number">
+                                    <input id="card_number" name="card_number" type="text" class="form-control" placeholder="ID Card Number" value="<?php echo $personal['card_number']; ?>">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="mother_name" class="control-label mb-1">Mother's Name</label>
-                                    <input id="mother_name" name="mother_name" type="text" class="form-control" placeholder="Mother's Name">
+                                    <input id="mother_name" name="mother_name" type="text" class="form-control" placeholder="Mother's Name" value="<?php echo $personal['mother_name']; ?>">
                                     <label for="father_name" class="control-label mb-1">Father's Name</label>
-                                    <input id="father_name" name="father_name" type="text" class="form-control" placeholder="Father's Name">
+                                    <input id="father_name" name="father_name" type="text" class="form-control" placeholder="Father's Name" value="<?php echo $personal['father_name']; ?>">
                                     <label for="spouse_name" class="control-label mb-1">Name of Spouse</label>
-                                    <input id="spouse_name" name="spouse_name" type="text" class="form-control" placeholder="Name of Spouse">
+                                    <input id="spouse_name" name="spouse_name" type="text" class="form-control" placeholder="Name of Spouse" value="<?php echo $personal['spouse_name']; ?>">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="contact_person" class="control-label mb-1">Contact Person</label>
-                                    <input id="contact_person" name="contact_person" type="text" class="form-control" placeholder="Contact Person">
+                                    <input id="contact_person" name="contact_person" type="text" class="form-control" placeholder="Contact Person" value="<?php echo $personal['contact_person']; ?>">
                                     <label for="contact_number" class="control-label mb-1">Contact Number</label>
-                                    <input id="contact_number" name="contact_number" type="text" class="form-control" placeholder="Contact Number">
+                                    <input id="contact_number" name="contact_number" type="text" class="form-control" placeholder="Contact Number" value="<?php echo $personal['contact_number']; ?>">
                                     <label for="s_contact_number" class="control-label mb-1">Spouse Contact Number</label>
-                                    <input id="s_contact_number" name="s_contact_number" type="text" class="form-control" placeholder="Spouse Contact Number">
+                                    <input id="s_contact_number" name="s_contact_number" type="text" class="form-control" placeholder="Spouse Contact Number" value="<?php echo $personal['s_contact_number']; ?>">
                                 </div>
                             </div><br />
 
@@ -347,26 +364,26 @@ include("../classes/User.php");
                             <div class="row">
                                 <div class="col-sm-4">
                                     <label for="company_affiliated" class="control-label mb-1">Company Affiliated With</label>
-                                    <input id="company_affiliated" name="company_affiliated" type="text" class="form-control" placeholder="Company Name">
+                                    <input id="company_affiliated" name="company_affiliated" type="text" class="form-control" placeholder="Company Affiliated With" value="<?php echo $personal['company_affiliated']; ?>">
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="company_address" class="control-label mb-1">Company Address</label>
-                                    <input id="company_address" name="company_address" type="text" class="form-control" placeholder="Company Address">
+                                    <input id="company_address" name="company_address" type="text" class="form-control" placeholder="Company Address" value="<?php echo $personal['company_address']; ?>">
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="company_number" class="control-label mb-1">Company Contact Number</label>
-                                    <input id="company_number" name="company_number" type="text" class="form-control" placeholder="Company Contact Number">
+                                    <input id="company_number" name="company_number" type="text" class="form-control" placeholder="Company Contact Number" value="<?php echo $personal['company_number']; ?>">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="position" class="control-label mb-1">Position/Occupation</label>
-                                    <input id="position" name="position" type="text" class="form-control" placeholder="Position Occupation">
+                                    <input id="position" name="position" type="text" class="form-control" placeholder="Position Occupation" value="<?php echo $personal['position']; ?>">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="work_status" class="control-label mb-1">Work Status</label>
-                                    <input id="work_status" name="work_status" type="text" class="form-control" placeholder="Work Status">
+                                    <input id="work_status" name="work_status" type="text" class="form-control" placeholder="Work Status" value="<?php echo $personal['work_status']; ?>">
                                 </div>
                             </div><br />
 

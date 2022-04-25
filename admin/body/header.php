@@ -1,10 +1,16 @@
 <?php
 //Stop access when not logged in!
 if (isset($_SESSION['username'])) {
+    // Session Username
     $userLoggedIn = $_SESSION['username'];
+
     //$user is to select all data from users table
     $user_details_query = mysqli_query($con, "SELECT * FROM users WHERE username='$userLoggedIn'");
     $user = mysqli_fetch_array($user_details_query);
+
+    // Session Id
+    $id = $user['id'];
+    $_SESSION['id'] = $id;
 
     //Authorized for Admin only
     if ($user["position"] == "Admin") {
