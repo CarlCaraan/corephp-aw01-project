@@ -92,9 +92,9 @@ include("../classes/User.php");
                 <div class="page-header float-left">
                     <div class="page-title">
                         <h1>My Profile
-                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add"><i class="fa fa-plus"> EDIT PROFILE</i>
+                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#profile"><i class="fa fa-plus"> EDIT PROFILE</i>
                             </button>
-                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add"><i class="fa fa-plus"> CHANGE PASSWORD</i>
+                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#password"><i class="fa fa-plus"> CHANGE PASSWORD</i>
                             </button>
                         </h1>
                     </div>
@@ -262,11 +262,8 @@ include("../classes/User.php");
         </div>
         <!-- end content -->
 
-
-
-
-        <!-- start modal add -->
-        <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+        <!-- start edit profile modal add -->
+        <div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -400,7 +397,56 @@ include("../classes/User.php");
                 </div>
             </div>
         </div>
-        <!-- end modal add -->
+        <!-- end edit profile modal add -->
+
+        <!-- start change password modal add -->
+        <div class="modal fade" id="password" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mediumModalLabel">Change Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="../app/controllers/change_password_handler.php" method="POST">
+                            <div class="card-header">
+                                <strong class="card-title">Never tell your password to anyone!!!</strong>
+                            </div><br />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label for="current_password" class="control-label mb-1">Current Password*</label>
+                                    <input id="current_password" name="current_password" type="password" class="form-control">
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label for="new_password" class="control-label mb-1">New Password*</label>
+                                    <input id="new_password" name="new_password" type="password" class="form-control">
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label for="confirm_password" class="control-label mb-1">Confirm Password*</label>
+                                    <input id="confirm_password" name="confirm_password" type="password" class="form-control">
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary btn-sm" name="update_password">
+                                    <i class="fa fa-save"></i> Save
+                                </button>
+                                <button type="reset" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Clear
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end change password modal add -->
+
     </div>
     <!-- end -->
     </div>
