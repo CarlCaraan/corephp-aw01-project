@@ -6,8 +6,8 @@ $email = "";
 $password = "";
 $position = "";
 $date = "";
-$error_array = array();
 $status = "Pending";
+$error_array = array();
 
 //-- Start Register Button --//
 if (isset($_POST['register_button'])) {

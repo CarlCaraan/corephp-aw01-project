@@ -333,125 +333,42 @@ include("../app/controllers/flash_message.php")
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="mediumModalLabel">Add Costumer</h5>
+                    <h5 class="modal-title" id="mediumModalLabel">Add Account</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-
-
-                    <form action="">
+                    <form action="../app/controllers/admin_backend/Account/add_handler.php" method="POST">
                         <div class="card-header">
-                            <strong class="card-title">Personal Information</strong>
+                            <strong class="card-title">Fill up Information</strong>
                         </div><br />
                         <div class="row">
                             <div class="col-sm-3">
-                                <label for="lname" class="control-label mb-1">Lastname*</label>
-                                <input id="lname" name="lname" type="text" class="form-control" placeholder="Lastname here!">
+                                <label for="first_name" class="control-label mb-1">First Name*</label>
+                                <input id="first_name" name="first_name" type="text" class="form-control" placeholder="First Name">
                             </div>
                             <div class="col-sm-3">
-                                <label for="fname" class="control-label mb-1">Firstname</label>
-                                <input id="fname" name="fname" type="text" class="form-control" placeholder="Firstname here!">
+                                <label for="last_name" class="control-label mb-1">Last Name*</label>
+                                <input id="last_name" name="last_name" type="text" class="form-control" placeholder="Last Name">
                             </div>
                             <div class="col-sm-3">
-                                <label for="mname" class="control-label mb-1">Middle Name</label>
-                                <input id="mname" name="mname" type="text" class="form-control" placeholder="Middlename here!">
+                                <label for="email" class="control-label mb-1">Email Address*</label>
+                                <input id="email" name="email" type="email" class="form-control" placeholder="Email Address">
                             </div>
-                            <!--  <div class="col-sm-3">
-                                              <label for="mname" class="control-label mb-1">Catteg</label>
-                                              <input id="mname" name="mname" type="text" class="form-control" placeholder="Middlename here!">
-                                        </div> -->
-
                             <div class="col-sm-3">
-                                <label for="select" class="control-label mb-1">Categories</label>
-                                <select name="select" id="select" class="form-control">
-                                    <option value="0">Please select</option>
-                                    <option value="atm">ATM</option>
-                                    <option value="sps">SPS</option>
-                                    <option value="spsv1">SPSV1</option>
+                                <label for="select" class="control-label mb-1">Position*</label>
+                                <select class="form-control" name="position" placeholder="Position">
+                                    <option value="none" selected>Select Position</option>
+                                    <option value="Staff">Staff</option>
+                                    <option value="Branch Manager">Branch Manager</option>
+                                    <option value="Admin">Admin</option>
                                 </select>
                             </div>
-
-
                         </div>
-
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="p_address" class="control-label mb-1">Permanent Address</label>
-                                <input id="p_address" name="p_address" type="text" class="form-control" placeholder="Permanent Address here!">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="e_address" class="control-label mb-1">Email Address</label>
-                                <input id="e_address" name="e_address" type="text" class="form-control" placeholder="Email Address here!">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="bday" class="control-label mb-1">Date of Birth</label>
-                                <input id="bday" name="bday" type="text" class="form-control" placeholder="Birthday here!">
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="t_number" class="control-label mb-1">Telephone/Mobile Number</label>
-                                <input id="t_number" name="t_number" type="text" class="form-control" placeholder="Telephone/Mobile Number here!">
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="id_card" class="control-label mb-1">ID Card Number</label>
-                                <input id="id_card" name="id_card" type="text" class="form-control" placeholder="ID Card Number here!">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="mother" class="control-label mb-1">Mother's Name</label>
-                                <input id="mother" name="mother" type="text" class="form-control" placeholder="Mother's Name here!">
-                                <label for="father" class="control-label mb-1">Father's Name</label>
-                                <input id="father" name="father" type="text" class="form-control" placeholder="Father's Name here!">
-                                <label for="spouse" class="control-label mb-1">Name of Spouse</label>
-                                <input id="spouse" name="spouse" type="text" class="form-control" placeholder="Name of Spouse here!">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="c_person" class="control-label mb-1">Contact Person</label>
-                                <input id="c_person" name="c_person" type="text" class="form-control" placeholder="Contact Person here!">
-                                <label for="contact" class="control-label mb-1">Contact Number</label>
-                                <input id="contact" name="contact" type="text" class="form-control" placeholder="Contact Number here!">
-                                <label for="s_number" class="control-label mb-1">Spouse Contact Number</label>
-                                <input id="s_number" name="s_number" type="text" class="form-control" placeholder="Spouse Contact Number here!">
-                            </div>
-                        </div><br />
-
-                        <div class="card-header">
-                            <strong class="card-title">Company Information</strong>
-                        </div><br />
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="c_affiliated" class="control-label mb-1">Company Affiliated With</label>
-                                <input id="c_affiliated" name="c_affiliated" type="text" class="form-control" placeholder="Lastname here!">
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="c_address" class="control-label mb-1">Company Address</label>
-                                <input id="c_address" name="c_address" type="text" class="form-control" placeholder="Firstname here!">
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="c_number" class="control-label mb-1">Company Contact Number</label>
-                                <input id="c_number" name="c_number" type="text" class="form-control" placeholder="Middlename here!">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="position" class="control-label mb-1">Position/Occupation</label>
-                                <input id="position" name="position" type="text" class="form-control" placeholder="Permanent Address here!">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="w_status" class="control-label mb-1">Work Status</label>
-                                <input id="w_status" name="w_status" type="text" class="form-control" placeholder="Email Address here!">
-                            </div>
-                        </div><br />
-
+                        <br />
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary btn-sm">
+                            <button type="submit" class="btn btn-primary btn-sm" name="add_account">
                                 <i class="fa fa-save"></i> Save
                             </button>
                             <button type="reset" class="btn btn-danger btn-sm">
@@ -460,7 +377,6 @@ include("../app/controllers/flash_message.php")
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
