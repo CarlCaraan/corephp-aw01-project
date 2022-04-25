@@ -9,6 +9,7 @@ require 'app/controllers/auth/register_handler.php';
 
 <head>
 	<title>Sign Up | App</title>
+	<link rel="icon" href="resources/img/login.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script type="application/x-javascript">
@@ -41,14 +42,10 @@ require 'app/controllers/auth/register_handler.php';
 																											echo $_SESSION['reg_fname'];
 																										} ?>" required>
 
-					<?php if (in_array("Your first name must be between 2 and 25 characters<br>", $error_array)) echo "Your first name must be between 2 and 25 characters<br>"; ?>
-
 					<input class="text email" type="text" name="reg_lname" placeholder="Last Name" value="<?php
 																											if (isset($_SESSION['reg_lname'])) {
 																												echo $_SESSION['reg_lname'];
 																											} ?>" required>
-
-					<?php if (in_array("Your last name must be between 2 and 25 characters<br>", $error_array)) echo "Your last name must be between 2 and 25 characters<br>"; ?>
 
 					<select class="text" name="reg_position" placeholder="Position">
 						<option value="none" selected>Select your position</option>
@@ -56,24 +53,31 @@ require 'app/controllers/auth/register_handler.php';
 						<option value="Branch Manager">Branch Manager</option>
 						<option value="Admin">Admin</option>
 					</select>
-					<?php if (in_array("Please choose your position!<br>", $error_array)) echo "Please choose your position!<br>"; ?>
 
 					<input class="text email" type="email" name="reg_email" placeholder="Email" value="<?php
 																										if (isset($_SESSION['reg_email'])) {
 																											echo $_SESSION['reg_email'];
 																										} ?>" required>
-					<?php if (in_array("Email already in use<br>", $error_array)) echo "Email already in use<br>";
-					else if (in_array("Invalid email format<br>", $error_array)) echo "Invalid email format<br>";
-					else if (in_array("Emails don't match<br>", $error_array)) echo "Emails don't match<br>"; ?>
 
-					<input class="text" type="password" name="reg_password" placeholder="Password" required>
+					<input class="text" type="password" name="reg_password" placeholder="Password" required><br />
 
-					<?php if (in_array("Your passwords do not match<br>", $error_array)) echo "Your passwords do not match<br>";
-					else if (in_array("Your password can only contain english characters or numbers<br>", $error_array)) echo "Your password can only contain english characters or numbers<br>";
-					else if (in_array("Your password must be between 5 and 30 characters<br>", $error_array)) echo "Your password must be between 5 and 30 characters<br>"; ?>
+					<!-- Start Validation Message -->
+					<p>
+						<?php if (in_array("Your first name must be between 2 and 25 characters<br>", $error_array)) echo "Your first name must be between 2 and 25 characters<br>"; ?>
+						<?php if (in_array("Your last name must be between 2 and 25 characters<br>", $error_array)) echo "Your last name must be between 2 and 25 characters<br>"; ?>
+						<?php if (in_array("Please choose your position!<br>", $error_array)) echo "Please choose your position!<br>"; ?>
+						<?php if (in_array("Email already in use<br>", $error_array)) echo "Email already in use<br>";
+						else if (in_array("Invalid email format<br>", $error_array)) echo "Invalid email format<br>";
+						else if (in_array("Emails don't match<br>", $error_array)) echo "Emails don't match<br>"; ?>
+						<?php if (in_array("Your passwords do not match<br>", $error_array)) echo "Your passwords do not match<br>";
+						else if (in_array("Your password can only contain english characters or numbers<br>", $error_array)) echo "Your password can only contain english characters or numbers<br>";
+						else if (in_array("Your password must be between 5 and 30 characters<br>", $error_array)) echo "Your password must be between 5 and 30 characters<br>"; ?>
+						<?php if (in_array("<span>Wait the approval of your account. Thank You!</span><br>", $error_array)) echo "<span>Wait the approval of your account. Thank You!</span><br>"; ?>
+					</p>
+					<!-- End Validation Message -->
+
 					<input type="submit" value="SIGN-UP" name="register_button">
 				</form>
-				<?php if (in_array("<span>Wait the approval of your account. Thank You!</span><br>", $error_array)) echo "<span>Wait the approval of your account. Thank You!</span><br>"; ?>
 				<!-- <p>Wait the approval of your account. Thank You!</p><br> -->
 				<p>Already have an Account? <a href="login"> SIGN IN!</a></p>
 			</div>

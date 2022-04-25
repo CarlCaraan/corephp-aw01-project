@@ -11,6 +11,7 @@ require 'app/controllers/auth/login_handler.php';
 
 <head>
 	<title>Login | App</title>
+	<link rel="icon" href="resources/img/login.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script type="application/x-javascript">
@@ -44,10 +45,13 @@ require 'app/controllers/auth/login_handler.php';
 																														echo $_SESSION['log_email'];
 																													} ?>">
 					<input class="text" type="password" name="log_password" placeholder="Password" required=""><br />
-
-					<?php if (in_array("Email or password was incorrect<br>", $error_array)) echo "Email or password was incorrect<br>"; ?>
-					<?php if (in_array("Your account is not yet approved!<br>", $error_array)) echo "Your account is not yet approved!<br>"; ?>
-					<?php if (in_array("Your account have been rejected!<br>", $error_array)) echo "Your account have been rejected!<br>"; ?>
+					<!-- Start Validation Message -->
+					<p class="validation-text">
+						<?php if (in_array("Email or password was incorrect<br>", $error_array)) echo "Email or password was incorrect<br>"; ?>
+						<?php if (in_array("Your account is not yet approved!<br>", $error_array)) echo "Your account is not yet approved!<br>"; ?>
+						<?php if (in_array("Your account has been rejected!<br>", $error_array)) echo "Your account has been rejected!<br>"; ?>
+					</p>
+					<!-- End Validation Message -->
 
 					<input type="submit" name="login_button" value="LOGIN">
 				</form>
