@@ -94,6 +94,17 @@ if (isset($_POST['edit_profile'])) {
     $work_status = ucfirst(strtolower($work_status));
 
     //-- Start Validation Message --//
+    if (strlen($first_name) > 25 || strlen($first_name) < 2) {
+        $error_array = "1";
+        flash("error", "First Name must be between 2 and 25 characters!");
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
+
+    if (strlen($last_name) > 25 || strlen($last_name) < 2) {
+        $error_array = "1";
+        flash("error", "Last Name must be between 2 and 25 characters!");
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $email = filter_var($email, FILTER_VALIDATE_EMAIL);
         $e_check = mysqli_query($con, "SELECT email FROM users WHERE email='$email'");

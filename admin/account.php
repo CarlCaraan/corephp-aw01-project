@@ -13,8 +13,8 @@ include("../classes/User.php");
     <meta name="description" content="WEB AND DATABASE">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--   <link rel="apple-touch-icon" href="apple-icon.png">
-    <link rel="shortcut icon" href="favicon.ico"> -->
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
 
     <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
@@ -30,6 +30,9 @@ include("../classes/User.php");
 
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="../resources/css/toastr.min.css">
+
+    <link rel="stylesheet" href="vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
 
 </head>
 
@@ -69,217 +72,242 @@ include("../classes/User.php");
                 </div>
             </div>
         </div>
+        <div class="content mt-3 mb-5">
+            <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            List of Accounts
+                        </th>
+                        <th>
+                            Joined
+                        </th>
 
-        <div class="content mt-3">
-            <?php
-            $sql = "SELECT * FROM users INNER JOIN personal ON personal.user_id = users.id";
-            $result = $con->query($sql);
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $sql = "SELECT * FROM users INNER JOIN personal ON personal.user_id = users.id ORDER BY username";
+                    $result = $con->query($sql);
 
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while ($row = $result->fetch_assoc()) {
-            ?>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="card text-white bg-flat-color-1">
-                            <div class="card-body pb-0">
+                    if ($result->num_rows > 0) {
+                        // output data of each row
+                        while ($row = $result->fetch_assoc()) {
+                    ?>
+                            <tr>
+                                <td width="60%">
 
-                                <aside class="profile-nav alt">
-                                    <section class="card">
-                                        <div class="card-header user-header alt bg-dark">
-                                            <div class="media">
-                                                <a href="#">
-                                                    <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="../resources/img/uploads/<?php echo ($row['image'] != "") ? $row['image'] : 'default.jpg'; ?>">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h4 class="text-light display-6">
-                                                        <?php echo $row['first_name']; ?>
-                                                        <?php echo $row['last_name']; ?>
-                                                    </h4>
-                                                    <p><?php echo $row['usertype']; ?></p>
-                                                    <p>Joined: <?php echo $row['signup_date']; ?></p>
-                                                </div>
+                                    <div class="col-12">
+                                        <div class="card text-white bg-flat-color-1">
+                                            <div class="card-body pb-0">
+
+                                                <aside class="profile-nav alt">
+                                                    <section class="card">
+                                                        <div class="card-header user-header alt bg-dark">
+                                                            <div class="media">
+                                                                <a href="#">
+                                                                    <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="../resources/img/uploads/<?php echo ($row['image'] != "") ? $row['image'] : 'default.jpg'; ?>">
+                                                                </a>
+                                                                <div class="media-body">
+                                                                    <h4 class="text-light display-6">
+                                                                        <?php echo $row['first_name']; ?>
+                                                                        <?php echo $row['last_name']; ?>
+                                                                    </h4>
+                                                                    <p><?php echo $row['usertype']; ?></p>
+                                                                    <p>Joined: <?php echo $row['signup_date']; ?></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                                <a href="#"> Email:
+                                                                    <?php echo $row['email']; ?>
+                                                                    <span class="badge badge-primary pull-right"></span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                <a href="#"> <i class="fa fa-tasks"></i> Account Status:
+                                                                    <!-- <span class="badge badge-danger pull-right">15</span> -->
+                                                                    <?php echo $row['status']; ?>
+                                                                </a>
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                <center>
+                                                                    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['id'] ?>"><i class="fa fa-eye"></i> </button>
+                                                                    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#approved<?php echo $row['id'] ?>"><i class="fa fa-check"></i></button>
+                                                                    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reject<?php echo $row['id'] ?>"><i class="fa fa-times"></i></button>
+                                                                    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="fa fa-trash"></i></button>
+                                                                </center>
+                                                            </li>
+                                                        </ul>
+
+                                                    </section>
+                                                </aside>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                <a href="#"> Email:
-                                                    <?php echo $row['email']; ?>
-                                                    <span class="badge badge-primary pull-right"></span>
-                                                </a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <a href="#"> <i class="fa fa-tasks"></i> Account Status:
-                                                    <!-- <span class="badge badge-danger pull-right">15</span> -->
-                                                    <?php echo $row['status']; ?>
-                                                </a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <center>
-                                                    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['id'] ?>"><i class="fa fa-eye"></i> </button>
-                                                    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#approved<?php echo $row['id'] ?>"><i class="fa fa-check"></i></button>
-                                                    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reject<?php echo $row['id'] ?>"><i class="fa fa-times"></i></button>
-                                                    <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#delete<?php echo $row['id'] ?>"><i class="fa fa-trash"></i></button>
-                                                </center>
-                                            </li>
-                                        </ul>
 
-                                    </section>
-                                </aside>
-                            </div>
+                                    <!-- modal view -->
+                                    <div class="modal fade" id="view<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="mediumModalLabel">Costumer Information</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="card-header">
+                                                        <strong class="card-title">Personal Information</strong>
+                                                    </div><br />
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
 
-                        </div>
-                    </div>
+                                                            <aside class="profile-nav alt">
+                                                                <section class="card">
+                                                                    <div class="card-header user-header alt bg-dark">
+                                                                        <div class="media">
+                                                                            <a href="#">
+                                                                                <img class="align-self-center rounded-circle mr-3" style="width:135px; height:135px;" alt="<?php echo $personal['image']; ?>" src="../resources/img/uploads/<?php echo ($row['image'] != "") ? $row['image'] : 'default.jpg'; ?>">
+                                                                            </a>
+                                                                            <div class="media-body">
+                                                                                <h2 class="text-light display-6"><?php echo $row['first_name'] . " " . $row['last_name'] ?></h2>
+                                                                                <p><?php echo $row['usertype'] ?><br />
+                                                                                    <?php echo $row['mobile'] ?><br />
+                                                                                    Birthday: <?php echo $row['dob'] ?><br />
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
 
-                    <!-- modal view -->
-                    <div class="modal fade" id="view<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="mediumModalLabel">Costumer Information</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="card-header">
-                                        <strong class="card-title">Personal Information</strong>
-                                    </div><br />
-                                    <div class="row">
-                                        <div class="col-sm-6">
-
-                                            <aside class="profile-nav alt">
-                                                <section class="card">
-                                                    <div class="card-header user-header alt bg-dark">
-                                                        <div class="media">
-                                                            <a href="#">
-                                                                <img class="align-self-center rounded-circle mr-3" style="width:125px; height:135px;" alt="" src="">
-                                                            </a>
-                                                            <div class="media-body">
-                                                                <h2 class="text-light display-6"><?php echo $row['first_name'] . " " . $row['last_name'] ?></h2>
-                                                                <p><?php echo $row['usertype'] ?><br />
-                                                                    <?php echo $row['mobile'] ?><br />
-                                                                    Birthday: <?php echo $row['dob'] ?><br />
-                                                                </p>
-                                                            </div>
+                                                                </section>
+                                                            </aside>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <input id="p_address" name="p_address" type="text" class="form-control" value="<?php echo $row['email'] ?>" placeholder="Email Address" disabled><br />
+                                                            <input id="p_address" name="p_address" type="text" class="form-control" value="<?php echo $row['address'] ?>" placeholder="Permanent Address" disabled><br />
                                                         </div>
                                                     </div>
 
-                                                </section>
-                                            </aside>
+                                                    <strong class="card-title">Company Information</strong>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label></label>
+                                                            <input id="t_number" name="t_number" type="text" class="form-control" value="<?php echo $row['company_affiliated'] ?>" placeholder="Company Affiliated With" disabled>
+                                                            <label></label>
+                                                            <input id="status" name="status" type="text" class="form-control" value="<?php echo $row['company_address'] ?>" placeholder="Company Address" disabled>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label></label>
+                                                            <input id="age" name="age" type="text" class="form-control" value="<?php echo $row['company_number'] ?>" placeholder="Company Contact Number" disabled>
+                                                            <label></label>
+                                                            <input id="gender" name="gender" type="text" class="form-control" value="<?php echo $row['work_status'] ?>" placeholder="Work Status" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <input id="p_address" name="p_address" type="text" class="form-control" value="<?php echo $row['email'] ?>" placeholder="Email Address" disabled><br />
-                                            <input id="p_address" name="p_address" type="text" class="form-control" value="<?php echo $row['address'] ?>" placeholder="Permanent Address" disabled><br />
+                                    </div>
+                                    <!-- end modal view -->
+
+                                    <!-- modal approved -->
+                                    <div class="modal fade" id="approved<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="mediumModalLabel">Approved Account</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p align="center">Are you sure? You want to approved this Account?</p>
+                                                    <div class="modal-footer">
+                                                        <a href="../app/controllers/admin_backend/Account/approve_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
+                                    <!-- end modal approved -->
 
-                                    <strong class="card-title">Company Information</strong>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label></label>
-                                            <input id="t_number" name="t_number" type="text" class="form-control" value="<?php echo $row['company_affiliated'] ?>" placeholder="Company Affiliated With" disabled>
-                                            <label></label>
-                                            <input id="status" name="status" type="text" class="form-control" value="<?php echo $row['company_address'] ?>" placeholder="Company Address" disabled>
+                                    <!-- modal reject -->
+                                    <div class="modal fade" id="reject<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="mediumModalLabel">Reject Account</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p align="center">Are you sure? You want to Reject this Account?</p>
+                                                    <div class="modal-footer">
+                                                        <a href="../app/controllers/admin_backend/Account/reject_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <label></label>
-                                            <input id="age" name="age" type="text" class="form-control" value="<?php echo $row['company_number'] ?>" placeholder="Company Contact Number" disabled>
-                                            <label></label>
-                                            <input id="gender" name="gender" type="text" class="form-control" value="<?php echo $row['work_status'] ?>" placeholder="Work Status" disabled>
+                                    </div>
+                                    <!-- end modal reject -->
+
+                                    <!-- modal delete -->
+                                    <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="mediumModalLabel">Delete Account</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p align="center">Are you sure? You want to Delete this Account?</p>
+                                                    <div class="modal-footer">
+                                                        <a href="../app/controllers/admin_backend/Account/delete_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <!-- end modal delete -->
+                                </td>
+                                <td width="40%">
+                                    <?php echo $row['signup_date'] ?>
+                                </td>
+                            </tr>
+                    <?php
+                        }
+                    } else {
+                        echo "0 results";
+                    }
+                    $con->close();
+                    ?>
+                </tbody>
+            </table>
+        </div>
 
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end modal view -->
 
-                    <!-- modal approved -->
-                    <div class="modal fade" id="approved<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="mediumModalLabel">Approved Account</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p align="center">Are you sure? You want to approved this Account?</p>
-                                    <div class="modal-footer">
-                                        <a href="../app/controllers/admin_backend/Account/approve_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
-                                    </div>
-                                </div>
 
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end modal approved -->
-
-                    <!-- modal reject -->
-                    <div class="modal fade" id="reject<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="mediumModalLabel">Reject Account</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p align="center">Are you sure? You want to Reject this Account?</p>
-                                    <div class="modal-footer">
-                                        <a href="../app/controllers/admin_backend/Account/reject_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end modal reject -->
-
-                    <!-- modal delete -->
-                    <div class="modal fade" id="delete<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="mediumModalLabel">Delete Account</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p align="center">Are you sure? You want to Delete this Account?</p>
-                                    <div class="modal-footer">
-                                        <a href="../app/controllers/admin_backend/Account/delete_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end modal delete -->
-
-            <?php
-                }
-            } else {
-                echo "0 results";
-            }
-            $con->close();
-            ?>
-
-        </div> <!-- .content -->
     </div><!-- /#right-panel -->
 
     <!-- Right Panel -->
+
+
 
     <script src="vendors/jquery/dist/jquery.min.js"></script>
     <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
@@ -287,12 +315,17 @@ include("../classes/User.php");
     <script src="assets/js/main.js"></script>
 
 
-    <script src="vendors/chart.js/dist/Chart.bundle.min.js"></script>
-    <script src="assets/js/dashboard.js"></script>
-    <script src="assets/js/widgets.js"></script>
-    <script src="vendors/jqvmap/dist/jquery.vmap.min.js"></script>
-    <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-    <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="vendors/jszip/dist/jszip.min.js"></script>
+    <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script src="assets/js/init-scripts/data-table/datatables-init.js"></script>
 
     <!-- Toastr JS -->
     <script src="../resources/js/toastr.min.js"></script>

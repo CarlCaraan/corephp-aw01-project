@@ -182,7 +182,7 @@ include("../classes/User.php");
                                     <input id="address" name="address" type="text" class="form-control" placeholder="Permanent Address" value="<?php echo $personal['address']; ?>" disabled>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="email" class="control-label mb-1">Email Address</label>
+                                    <label for="email" class="control-label mb-1">Email Address*</label>
                                     <input id="email" name="email" type="text" class="form-control" placeholder="Email Address" value="<?php echo $user['email']; ?>" disabled>
                                 </div>
                             </div>
@@ -323,7 +323,7 @@ include("../classes/User.php");
                                     <input id="address" name="address" type="text" class="form-control" placeholder="Permanent Address" value="<?php echo $personal['address']; ?>">
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="email" class="control-label mb-1">Email Address</label>
+                                    <label for="email" class="control-label mb-1">Email Address*</label>
                                     <input id="email" name="email" type="text" class="form-control" placeholder="Email Address" value="<?php echo $user['email']; ?>">
                                 </div>
                             </div>
