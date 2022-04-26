@@ -9,7 +9,7 @@ $email = "";
 $password = "password";
 $usertype = "";
 $date = "";
-$status = "Approved";
+$status = "Verified";
 $error_array = "";
 
 if (isset($_POST['add_account'])) {
