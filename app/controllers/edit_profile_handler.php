@@ -24,12 +24,14 @@ $company_number = "";
 $position = "";
 $work_status = "";
 
+// Error Varible Container
+$error_array = "";
+
 // Get Current User
 $userLoggedIn = $_SESSION['username'];
 $id = $_SESSION['id'];
 
-// Error Varible Container
-$error_array = "";
+
 
 if (isset($_POST['edit_profile'])) {
 
@@ -134,13 +136,42 @@ if (isset($_POST['edit_profile'])) {
     }
     //-- End Validation Message --//
 
+    // Working with Image
+    $check_image = strip_tags($_FILES['image']['name']);
+    if (strlen($check_image) > 0) {
+        $file_name = date("Y-m-d h-i-s") . "." . $_FILES['image']['name'];
+        $file_size = $_FILES['image']['size'];
+        $file_tmp = $_FILES['image']['tmp_name'];
+        $file_type = $_FILES['image']['type'];
+        $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
+
+        $expensions = array("jpeg", "jpg", "png");
+        if ($file_size == 0) {
+            $error_array = "1";
+        }
+        if (in_array($file_ext, $expensions) === false) {
+            $error_array = "1";
+            flash("error", "please choose a JPEG or PNG file!");
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        }
+
+        if ($file_size > 5097152) {
+            $error_array = "1";
+            flash("error", "File size must be 5 MB or less!");
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        }
+    }
+
     //-- Inserting Data --//
     if (empty($error_array)) { //If No Error Statement
+        unlink('../../resources/img/uploads/' . $personal['image']);
+        move_uploaded_file($file_tmp, "../../resources/img/uploads/" . $file_name);
+
         $user_query = mysqli_query($con, "UPDATE users SET first_name='$first_name', last_name='$last_name', email='$email' WHERE username='$userLoggedIn'");
         $personal_query = mysqli_query($con, "UPDATE personal SET middle_name='$middle_name', category='$category', address='$address', dob='$dob', mobile='$mobile',
             card_number='$card_number', mother_name='$mother_name', father_name='$father_name', spouse_name='$spouse_name', contact_person='$contact_person',
             contact_number='$contact_number', s_contact_number='$s_contact_number', company_affiliated='$company_affiliated', company_address='$company_address',
-            company_number='$company_number', position='$position', work_status='$work_status' WHERE user_id='$id'");
+            company_number='$company_number', position='$position', work_status='$work_status', image='$file_name' WHERE user_id='$id'");
 
         //Editing Successful Message
         flash("success", "Profile Updated Successfully!");

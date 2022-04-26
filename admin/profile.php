@@ -273,7 +273,7 @@ include("../classes/User.php");
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="../app/controllers/edit_profile_handler.php" method="POST">
+                        <form action="../app/controllers/edit_profile_handler.php" method="POST" enctype="multipart/form-data">
                             <div class="card-header">
                                 <strong class="card-title">Personal Information</strong>
                             </div><br />
@@ -353,7 +353,19 @@ include("../classes/User.php");
                                     <label for="s_contact_number" class="control-label mb-1">Spouse Contact Number</label>
                                     <input id="s_contact_number" name="s_contact_number" type="text" class="form-control" placeholder="Spouse Contact Number" value="<?php echo $personal['s_contact_number']; ?>">
                                 </div>
-                            </div><br />
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="image" class="control-label mb-1">Avatar</label>
+                                    <input class="form-control" type="file" name="image" id="image">
+                                </div>
+                                <div class="col-sm-6">
+                                    <img class="mt-2" src="../resources/img/uploads/<?php echo $personal['image']; ?>" width="100px" height="100px" alt="avatar">
+                                </div>
+                            </div>
+
+                            <br />
 
                             <div class="card-header">
                                 <strong class="card-title">Company Information</strong>

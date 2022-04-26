@@ -122,7 +122,10 @@ include("../app/controllers/flash_message.php");
                         echo $fullname_obj->getFirstAndLastName();
                         ?>
                     </span>
-                    <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                    <img class="user-avatar rounded ml-2" src="../resources/img/uploads/<?php
+                                                                                        $avatar_obj = new User($con, $userLoggedIn);
+                                                                                        echo $avatar_obj->getAvatar();
+                                                                                        ?>" alt="User Avatar">
                 </a>
 
                 <div class="user-menu dropdown-menu">

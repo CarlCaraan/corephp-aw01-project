@@ -11,6 +11,7 @@ class User
         $this->user = mysqli_fetch_array($user_details_query);
     }
 
+
     public function getUsername()
     {
         return $this->user['username'];
@@ -22,5 +23,13 @@ class User
         $query = mysqli_query($this->con, "SELECT first_name, last_name FROM users WHERE username='$username'");
         $row = mysqli_fetch_array($query);
         return $row['first_name'] . " " . $row['last_name'];
+    }
+
+    public function getAvatar()
+    {
+        $id = $this->user['id'];
+        $query = mysqli_query($this->con, "SELECT image FROM personal WHERE id='$id'");
+        $row = mysqli_fetch_array($query);
+        return $row['image'];
     }
 }
