@@ -454,6 +454,8 @@ include("../classes/User.php");
 
                             </div>
 
+                            <br />
+
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary btn-sm" name="update_password">
                                     <i class="fa fa-save"></i> Save
