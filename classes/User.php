@@ -28,7 +28,7 @@ class User
     public function getAvatar()
     {
         $id = $this->user['id'];
-        $query = mysqli_query($this->con, "SELECT image FROM personal WHERE id='$id'");
+        $query = mysqli_query($this->con, "SELECT image FROM personal WHERE user_id='$id'");
         $row = mysqli_fetch_array($query);
         return $row['image'];
     }

@@ -105,6 +105,15 @@ if (isset($_POST['register_button'])) {
 			'', '$first_name', '$last_name', '$username', '$email', '$password', '$position', '$status', '$date'
 		)");
 
+        $fetch = mysqli_query($con, "SELECT * from users WHERE email='$email'");
+        $row = mysqli_fetch_array($fetch);
+        $id = $row['id'];
+
+        $query1 = mysqli_query($con, "INSERT INTO personal VALUES (
+			'', '$id','','','','','','','','','','','','','','','','','',''
+		)");
+
+
         //Register Successful Message
         array_push($error_array, "<span>Wait the approval of your account. Thank You!</span><br>");
 

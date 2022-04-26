@@ -174,7 +174,6 @@ include("../classes/User.php");
                                     </select>
                                 </div>
 
-
                             </div>
 
                             <div class="row">
@@ -219,6 +218,11 @@ include("../classes/User.php");
                                     <input id="contact_number" name="contact_number" type="text" class="form-control" placeholder="Contact Number" value="<?php echo $personal['contact_number']; ?>" disabled>
                                     <label for="s_contact_number" class="control-label mb-1">Spouse Contact Number</label>
                                     <input id="s_contact_number" name="s_contact_number" type="text" class="form-control" placeholder="Spouse Contact Number" value="<?php echo $personal['s_contact_number']; ?>" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <img class="mt-2" src="../resources/img/uploads/<?php echo $personal['image']; ?>" width="100px" height="100px" alt="avatar">
                                 </div>
                             </div><br />
 
