@@ -114,14 +114,16 @@ include("../classes/User.php");
                                                                         <?php echo $row['last_name']; ?>
                                                                     </h4>
                                                                     <p><?php echo $row['usertype']; ?></p>
-                                                                    <p>Joined: <?php echo $row['signup_date']; ?></p>
+                                                                    <p>
+                                                                        <i>Address: <?php echo $row['address']; ?></i>
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                         <ul class="list-group list-group-flush">
                                                             <li class="list-group-item">
-                                                                <a href="#"> Email:
+                                                                <a href="#"><i class="ti-email"></i> Email:
                                                                     <?php echo $row['email']; ?>
                                                                     <span class="badge badge-primary pull-right"></span>
                                                                 </a>
@@ -194,24 +196,30 @@ include("../classes/User.php");
                                                             </aside>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <input id="p_address" name="p_address" type="text" class="form-control" value="<?php echo $row['email'] ?>" placeholder="Email Address" disabled><br />
-                                                            <input id="p_address" name="p_address" type="text" class="form-control" value="<?php echo $row['address'] ?>" placeholder="Permanent Address" disabled><br />
+                                                            <label for="father_name">Father's Name</label>
+                                                            <input id="father_name" name="father_name" type="text" class="form-control" value="<?php echo $row['father_name'] ?>" placeholder="Father Name" disabled><br />
+                                                            <label for="mother_name">Mother's Name</label>
+                                                            <input id="mother_name" name="mother_name" type="text" class="form-control" value="<?php echo $row['mother_name'] ?>" placeholder="Mother Name" disabled><br />
                                                         </div>
                                                     </div>
 
                                                     <strong class="card-title">Company Information</strong>
                                                     <div class="row">
                                                         <div class="col-sm-6">
-                                                            <label></label>
+                                                            <label>Affiliated With</label>
                                                             <input id="t_number" name="t_number" type="text" class="form-control" value="<?php echo $row['company_affiliated'] ?>" placeholder="Company Affiliated With" disabled>
-                                                            <label></label>
+                                                            <label>Company Address</label>
                                                             <input id="status" name="status" type="text" class="form-control" value="<?php echo $row['company_address'] ?>" placeholder="Company Address" disabled>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label></label>
+                                                            <label>Company Number</label>
                                                             <input id="age" name="age" type="text" class="form-control" value="<?php echo $row['company_number'] ?>" placeholder="Company Contact Number" disabled>
-                                                            <label></label>
+                                                            <label>Work Status</label>
                                                             <input id="gender" name="gender" type="text" class="form-control" value="<?php echo $row['work_status'] ?>" placeholder="Work Status" disabled>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Work Position</label>
+                                                            <input id="age" name="age" type="text" class="form-control" value="<?php echo $row['position'] ?>" placeholder="Position" disabled>
                                                         </div>
                                                     </div>
                                                 </div>
