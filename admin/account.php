@@ -72,7 +72,7 @@ include("../classes/User.php");
 
         <div class="content mt-3">
             <?php
-            $sql = "SELECT * FROM users";
+            $sql = "SELECT * FROM users INNER JOIN personal ON personal.user_id = users.id";
             $result = $con->query($sql);
 
             if ($result->num_rows > 0) {
@@ -88,14 +88,14 @@ include("../classes/User.php");
                                         <div class="card-header user-header alt bg-dark">
                                             <div class="media">
                                                 <a href="#">
-                                                    <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/admin.jpg">
+                                                    <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="../resources/img/uploads/<?php echo ($row['image'] != "") ? $row['image'] : 'default.jpg'; ?>">
                                                 </a>
                                                 <div class="media-body">
                                                     <h4 class="text-light display-6">
                                                         <?php echo $row['first_name']; ?>
                                                         <?php echo $row['last_name']; ?>
                                                     </h4>
-                                                    <p><?php echo $row['position']; ?></p>
+                                                    <p><?php echo $row['usertype']; ?></p>
                                                     <p>Joined: <?php echo $row['signup_date']; ?></p>
                                                 </div>
                                             </div>
@@ -153,11 +153,14 @@ include("../classes/User.php");
                                                     <div class="card-header user-header alt bg-dark">
                                                         <div class="media">
                                                             <a href="#">
-                                                                <img class="align-self-center rounded-circle mr-3" style="width:125px; height:135px;" alt="" src="images/admin.jpg">
+                                                                <img class="align-self-center rounded-circle mr-3" style="width:125px; height:135px;" alt="" src="">
                                                             </a>
                                                             <div class="media-body">
                                                                 <h2 class="text-light display-6"><?php echo $row['first_name'] . " " . $row['last_name'] ?></h2>
-                                                                <p><?php echo $row['position'] ?><br />09304895235<br />Birthday</p>
+                                                                <p><?php echo $row['usertype'] ?><br />
+                                                                    <?php echo $row['mobile'] ?><br />
+                                                                    Birthday: <?php echo $row['dob'] ?><br />
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -167,7 +170,7 @@ include("../classes/User.php");
                                         </div>
                                         <div class="col-sm-6">
                                             <input id="p_address" name="p_address" type="text" class="form-control" value="<?php echo $row['email'] ?>" placeholder="Email Address" disabled><br />
-                                            <input id="p_address" name="p_address" type="text" class="form-control" value="" placeholder="Permanent Address" disabled><br />
+                                            <input id="p_address" name="p_address" type="text" class="form-control" value="<?php echo $row['address'] ?>" placeholder="Permanent Address" disabled><br />
                                         </div>
                                     </div>
 
@@ -175,15 +178,15 @@ include("../classes/User.php");
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label></label>
-                                            <input id="t_number" name="t_number" type="text" class="form-control" placeholder="Company Affiliated With" disabled>
+                                            <input id="t_number" name="t_number" type="text" class="form-control" value="<?php echo $row['company_affiliated'] ?>" placeholder="Company Affiliated With" disabled>
                                             <label></label>
-                                            <input id="status" name="status" type="text" class="form-control" placeholder="Company Address" disabled>
+                                            <input id="status" name="status" type="text" class="form-control" value="<?php echo $row['company_address'] ?>" placeholder="Company Address" disabled>
                                         </div>
                                         <div class="col-sm-6">
                                             <label></label>
-                                            <input id="age" name="age" type="text" class="form-control" placeholder="Company Contact Number" disabled>
+                                            <input id="age" name="age" type="text" class="form-control" value="<?php echo $row['company_number'] ?>" placeholder="Company Contact Number" disabled>
                                             <label></label>
-                                            <input id="gender" name="gender" type="text" class="form-control" placeholder="Work Status" disabled>
+                                            <input id="gender" name="gender" type="text" class="form-control" value="<?php echo $row['work_status'] ?>" placeholder="Work Status" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -209,7 +212,7 @@ include("../classes/User.php");
                                 <div class="modal-body">
                                     <p align="center">Are you sure? You want to approved this Account?</p>
                                     <div class="modal-footer">
-                                        <a href="../app/controllers/admin_backend/Account/approve_handler.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary">YES</a>
+                                        <a href="../app/controllers/admin_backend/Account/approve_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
                                     </div>
                                 </div>
@@ -232,7 +235,7 @@ include("../classes/User.php");
                                 <div class="modal-body">
                                     <p align="center">Are you sure? You want to Reject this Account?</p>
                                     <div class="modal-footer">
-                                        <a href="../app/controllers/admin_backend/Account/reject_handler.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary">YES</a>
+                                        <a href="../app/controllers/admin_backend/Account/reject_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
                                     </div>
                                 </div>
@@ -255,7 +258,7 @@ include("../classes/User.php");
                                 <div class="modal-body">
                                     <p align="center">Are you sure? You want to Delete this Account?</p>
                                     <div class="modal-footer">
-                                        <a href="../app/controllers/admin_backend/Account/delete_handler.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary">YES</a>
+                                        <a href="../app/controllers/admin_backend/Account/delete_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
                                     </div>
                                 </div>
@@ -356,9 +359,9 @@ include("../classes/User.php");
                                 <input id="email" name="email" type="email" class="form-control" placeholder="Email Address">
                             </div>
                             <div class="col-sm-3">
-                                <label for="select" class="control-label mb-1">Position*</label>
-                                <select class="form-control" name="position" placeholder="Position">
-                                    <option value="none" selected>Select Position</option>
+                                <label for="select" class="control-label mb-1">User Type*</label>
+                                <select class="form-control" name="usertype">
+                                    <option value="none" selected>Select User Type</option>
                                     <option value="Staff">Staff</option>
                                     <option value="Branch Manager">Branch Manager</option>
                                     <option value="Admin">Admin</option>

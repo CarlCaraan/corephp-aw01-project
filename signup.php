@@ -47,7 +47,7 @@ require 'app/controllers/auth/register_handler.php';
 																												echo $_SESSION['reg_lname'];
 																											} ?>" required>
 
-					<select class="text" name="reg_position" placeholder="Position">
+					<select class="text" name="reg_usertype" placeholder="Position">
 						<option value="none" selected>Select your position</option>
 						<option value="Staff">Staff</option>
 						<option value="Branch Manager">Branch Manager</option>

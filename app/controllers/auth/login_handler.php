@@ -10,31 +10,31 @@ if (isset($_POST['login_button'])) {
     $check_database_query = mysqli_query($con, "SELECT * FROM users WHERE email='$email' AND password='$password'");
     $check_login_query = mysqli_num_rows($check_database_query);
 
-    // Verify Status and Position
+    // Verify Status and Usertype
     $check_data_query = mysqli_query($con, "SELECT * FROM users WHERE email='$email'");
     $row = mysqli_fetch_array($check_data_query);
     $status = $row['status'];
-    $position = $row['position'];
+    $usertype = $row['usertype'];
 
     if ($status == "Pending") {
         array_push($error_array, "Your account is not yet approved!<br>");
     } else if ($status == "Rejected") {
         array_push($error_array, "Your account has been rejected!<br>");
-    } else if ($check_login_query == 1 && $position == "Admin") { //Login query
+    } else if ($check_login_query == 1 && $usertype == "Admin") { //Login query
         $row = mysqli_fetch_array($check_database_query);
         $username = $row['username'];
         $_SESSION['username'] = $username;
 
         header("Location: admin/dashboard");
         exit();
-    } else if ($check_login_query == 1 && $position == "Branch Manager") { //Login query
+    } else if ($check_login_query == 1 && $usertype == "Branch Manager") { //Login query
         $row = mysqli_fetch_array($check_database_query);
         $username = $row['username'];
         $_SESSION['username'] = $username;
 
         header("Location: branch_manager/dashboard");
         exit();
-    } else if ($check_login_query == 1 && $position == "Staff") { //Login query
+    } else if ($check_login_query == 1 && $usertype == "Staff") { //Login query
         $row = mysqli_fetch_array($check_database_query);
         $username = $row['username'];
         $_SESSION['username'] = $username;

@@ -7,9 +7,9 @@ $first_name = "";
 $last_name = "";
 $email = "";
 $password = "password";
-$position = "";
+$usertype = "";
 $date = "";
-$status = "Pending";
+$status = "Approved";
 $error_array = "";
 
 if (isset($_POST['add_account'])) {
@@ -32,8 +32,8 @@ if (isset($_POST['add_account'])) {
     $_SESSION['email'] = $email; //Stores email into session variable
 
     //Position
-    $position = strip_tags($_POST['position']); //Remove html tags
-    $position = ucfirst(strtolower($position)); //Uppercase first letter
+    $usertype = strip_tags($_POST['usertype']); //Remove html tags
+    $usertype = ucfirst(strtolower($usertype)); //Uppercase first letter
 
     //Current date
     $date = date("Y-m-d");
@@ -47,9 +47,9 @@ if (isset($_POST['add_account'])) {
         $error_array = "1";
         flash("error", "Last Name must be between 2 and 25 characters!");
         header('Location: ' . $_SERVER['HTTP_REFERER']);
-    } else if (strlen($position) == 4) {
+    } else if (strlen($usertype) == 4) {
         $error_array = "1";
-        flash("error", "Position is Required!");
+        flash("error", "Usertype is Required!");
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     } else {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -88,7 +88,15 @@ if (isset($_POST['add_account'])) {
 
         //Insert Data to database
         $query = mysqli_query($con, "INSERT INTO users VALUES (
-			'', '$first_name', '$last_name', '$username', '$email', '$password', '$position', '$status', '$date'
+			'', '$first_name', '$last_name', '$username', '$email', '$password', '$usertype', '$status', '$date'
+		)");
+
+        $fetch = mysqli_query($con, "SELECT * from users WHERE email='$email'");
+        $row = mysqli_fetch_array($fetch);
+        $id = $row['id'];
+
+        $query1 = mysqli_query($con, "INSERT INTO personal VALUES (
+			'', '$id','','','','','','','','','','','','','','','','','',''
 		)");
 
         //Register Successful Message

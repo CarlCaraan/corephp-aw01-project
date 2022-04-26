@@ -4,7 +4,7 @@ $first_name = "";
 $last_name = "";
 $email = "";
 $password = "";
-$position = "";
+$usertype = "";
 $date = "";
 $status = "Pending";
 $error_array = array();
@@ -34,9 +34,9 @@ if (isset($_POST['register_button'])) {
     //Password
     $password = strip_tags($_POST['reg_password']); //Remove html tags
 
-    //Position
-    $position = strip_tags($_POST['reg_position']); //Remove html tags
-    $position = ucfirst(strtolower($position)); //Uppercase first letter
+    //Usertype
+    $usertype = strip_tags($_POST['reg_usertype']); //Remove html tags
+    $usertype = ucfirst(strtolower($usertype)); //Uppercase first letter
 
 
     $date = date("Y-m-d"); //Current date
@@ -73,8 +73,8 @@ if (isset($_POST['register_button'])) {
         array_push($error_array, "Your password can only contain english characters or numbers<br>");
     }
 
-    if (strlen($position) == 4) {
-        array_push($error_array, "Please choose your position!<br>");
+    if (strlen($usertype) == 4) {
+        array_push($error_array, "Please choose your Usertype!<br>");
     }
 
     if (strlen($password) < 5 || strlen($password) > 30) {
@@ -102,7 +102,7 @@ if (isset($_POST['register_button'])) {
 
         //Insert Data to database
         $query = mysqli_query($con, "INSERT INTO users VALUES (
-			'', '$first_name', '$last_name', '$username', '$email', '$password', '$position', '$status', '$date'
+			'', '$first_name', '$last_name', '$username', '$email', '$password', '$usertype', '$status', '$date'
 		)");
 
         $fetch = mysqli_query($con, "SELECT * from users WHERE email='$email'");
