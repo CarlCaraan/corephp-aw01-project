@@ -366,6 +366,7 @@ include("../classes/User.php");
                                 <div class="col-sm-6">
                                     <label for="image" class="control-label mb-1">Avatar</label>
                                     <input class="form-control" type="file" name="image" id="image">
+                                    <input class="btn btn-sm btn-secondary text-white mt-2" type="submit" name="delete_image" value="Remove Image" />
                                 </div>
                                 <div class="col-sm-6">
                                     <img id="show_image" class="mt-2" src="../resources/img/uploads/<?php $avatar_obj = new User($con, $userLoggedIn);

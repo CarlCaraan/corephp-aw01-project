@@ -31,7 +31,9 @@ $error_array = "";
 $userLoggedIn = $_SESSION['username'];
 $id = $_SESSION['id'];
 
-
+// Get Personal Table
+$current_personal = mysqli_query($con, "SELECT * FROM personal where user_id=$id");
+$personal = mysqli_fetch_array($current_personal); //Fetch Current User Columns
 
 if (isset($_POST['edit_profile'])) {
 
@@ -109,9 +111,6 @@ if (isset($_POST['edit_profile'])) {
     }
 
     // Check Mobile and Card Number is Unique
-    $current_personal = mysqli_query($con, "SELECT * FROM personal where user_id=$id");
-    $personal = mysqli_fetch_array($current_personal); //Fetch Current User Columns
-
     $m_check = mysqli_query($con, "SELECT mobile FROM personal where mobile=$mobile");
     $num_mobile = mysqli_num_rows($m_check); // return 1
 
@@ -180,4 +179,14 @@ if (isset($_POST['edit_profile'])) {
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
     $con->close();
+}
+
+// Delete Image
+if (isset($_POST['delete_image'])) {
+    $file_name = "";
+
+    $personal_query = mysqli_query($con, "UPDATE personal SET image='$file_name' WHERE user_id='$id'");
+    unlink('../../resources/img/uploads/' . $personal['image']);
+    flash("success", "Image Removed Successfully!");
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
