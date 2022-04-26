@@ -124,7 +124,7 @@ include("../app/controllers/flash_message.php");
                     </span>
                     <img class="user-avatar rounded ml-2" src="../resources/img/uploads/<?php $avatar_obj = new User($con, $userLoggedIn);
                                                                                         echo ($avatar_obj->getAvatar() != NULL) ?
-                                                                                            $avatar_obj->getAvatar() : "/admin.jpg";
+                                                                                            $avatar_obj->getAvatar() : "/default.jpg";
                                                                                         ?>" alt="User Avatar">
                 </a>
 

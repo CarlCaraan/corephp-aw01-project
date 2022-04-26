@@ -222,7 +222,10 @@ include("../classes/User.php");
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <img class="mt-2" src="../resources/img/uploads/<?php echo $personal['image']; ?>" width="100px" height="100px" alt="avatar">
+                                    <img class="mt-2" src="../resources/img/uploads/<?php $avatar_obj = new User($con, $userLoggedIn);
+                                                                                    echo ($avatar_obj->getAvatar() != NULL) ?
+                                                                                        $avatar_obj->getAvatar() : "/default.jpg";
+                                                                                    ?>" width="100px" height="100px" alt="avatar">
                                 </div>
                             </div><br />
 
@@ -365,7 +368,10 @@ include("../classes/User.php");
                                     <input class="form-control" type="file" name="image" id="image">
                                 </div>
                                 <div class="col-sm-6">
-                                    <img class="mt-2" src="../resources/img/uploads/<?php echo $personal['image']; ?>" width="100px" height="100px" alt="avatar">
+                                    <img class="mt-2" src="../resources/img/uploads/<?php $avatar_obj = new User($con, $userLoggedIn);
+                                                                                    echo ($avatar_obj->getAvatar() != NULL) ?
+                                                                                        $avatar_obj->getAvatar() : "/default.jpg";
+                                                                                    ?>" width="100px" height="100px" alt="avatar">
                                 </div>
                             </div>
 
