@@ -128,8 +128,15 @@ include("../classes/User.php");
                                                             </li>
                                                             <li class="list-group-item">
                                                                 <a href="#"> <i class="fa fa-tasks"></i> Account Status:
-                                                                    <!-- <span class="badge badge-danger pull-right">15</span> -->
-                                                                    <?php echo $row['status']; ?>
+                                                                    <?php
+                                                                    if ($row['status'] == 'Verified') {
+                                                                        echo '<button class="btn btn-sm btn-success rounded"><i class="ti-check-box"></i> Verified</button>';
+                                                                    } else if ($row['status'] == 'Pending') {
+                                                                        echo '<button class="btn btn-sm btn-warning rounded"><i class="ti-info-alt"></i> Pending</button>';
+                                                                    } else {
+                                                                        echo '<button class="btn btn-sm btn-danger rounded"><i class="ti-flag-alt-2"></i> Rejected</button>';
+                                                                    }
+                                                                    ?>
                                                                 </a>
                                                             </li>
                                                             <li class="list-group-item">
