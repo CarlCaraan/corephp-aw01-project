@@ -160,11 +160,13 @@ if (isset($_POST['edit_profile'])) {
             flash("error", "File size must be 5 MB or less!");
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
+        unlink('../../resources/img/uploads/' . $personal['image']);
+    } else {
+        $file_name = $personal['image'];
     }
 
     //-- Inserting Data --//
     if (empty($error_array)) { //If No Error Statement
-        unlink('../../resources/img/uploads/' . $personal['image']);
         move_uploaded_file($file_tmp, "../../resources/img/uploads/" . $file_name);
 
         $user_query = mysqli_query($con, "UPDATE users SET first_name='$first_name', last_name='$last_name', email='$email' WHERE username='$userLoggedIn'");

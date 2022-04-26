@@ -368,10 +368,10 @@ include("../classes/User.php");
                                     <input class="form-control" type="file" name="image" id="image">
                                 </div>
                                 <div class="col-sm-6">
-                                    <img class="mt-2" src="../resources/img/uploads/<?php $avatar_obj = new User($con, $userLoggedIn);
-                                                                                    echo ($avatar_obj->getAvatar() != NULL) ?
-                                                                                        $avatar_obj->getAvatar() : "/default.jpg";
-                                                                                    ?>" width="100px" height="100px" alt="avatar">
+                                    <img id="show_image" class="mt-2" src="../resources/img/uploads/<?php $avatar_obj = new User($con, $userLoggedIn);
+                                                                                                    echo ($avatar_obj->getAvatar() != NULL) ?
+                                                                                                        $avatar_obj->getAvatar() : "/default.jpg";
+                                                                                                    ?>" width="100px" height="100px" alt="avatar">
                                 </div>
                             </div>
 
@@ -536,6 +536,19 @@ include("../classes/User.php");
         <?php endif ?>
     </script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Show Chosen Image Ajax -->
+    <script>
+        $(document).ready(function() {
+            $('#image').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#show_image').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
+    </script>
 
 </body>
 
