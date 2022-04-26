@@ -1,7 +1,6 @@
 <?php
 require 'app/config/connect.php';
 //login, register handler
-require 'app/controllers/auth/register_handler.php';
 require 'app/controllers/auth/login_handler.php';
 ?>
 

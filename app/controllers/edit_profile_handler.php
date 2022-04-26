@@ -89,16 +89,7 @@ if (isset($_POST['edit_profile'])) {
     $work_status = strip_tags($_POST['work_status']);
     $work_status = ucfirst(strtolower($work_status));
 
-    //-- Validation Message --//
-    $current_personal = mysqli_query($con, "SELECT * FROM personal where user_id=$id");
-    $personal = mysqli_fetch_array($current_personal); //Fetch Current User Columns
-
-    $m_check = mysqli_query($con, "SELECT mobile FROM personal where mobile=$mobile");
-    $num_mobile = mysqli_num_rows($m_check); // return 1
-
-    $card_check = mysqli_query($con, "SELECT card_number FROM personal WHERE card_number='$card_number'");
-    $num_card = mysqli_num_rows($card_check); // return 1
-
+    //-- Start Validation Message --//
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $email = filter_var($email, FILTER_VALIDATE_EMAIL);
         $e_check = mysqli_query($con, "SELECT email FROM users WHERE email='$email'");
@@ -116,6 +107,15 @@ if (isset($_POST['edit_profile'])) {
     }
 
     // Check Mobile and Card Number is Unique
+    $current_personal = mysqli_query($con, "SELECT * FROM personal where user_id=$id");
+    $personal = mysqli_fetch_array($current_personal); //Fetch Current User Columns
+
+    $m_check = mysqli_query($con, "SELECT mobile FROM personal where mobile=$mobile");
+    $num_mobile = mysqli_num_rows($m_check); // return 1
+
+    $card_check = mysqli_query($con, "SELECT card_number FROM personal WHERE card_number='$card_number'");
+    $num_card = mysqli_num_rows($card_check); // return 1
+
     if ($personal['mobile'] == $mobile) {
     } else {
         if ($num_mobile > 0) {
@@ -132,6 +132,7 @@ if (isset($_POST['edit_profile'])) {
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
     }
+    //-- End Validation Message --//
 
     //-- Inserting Data --//
     if (empty($error_array)) { //If No Error Statement
