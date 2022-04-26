@@ -28,7 +28,7 @@ if (isset($_POST['register_button'])) {
     //email
     $email = strip_tags($_POST['reg_email']); //Remove html tags
     $email = str_replace(' ', '', $email); //remove spaces
-    $email = ucfirst(strtolower($email)); //Uppercase first letter
+    $email = strtolower($email); //Uppercase first letter
     $_SESSION['reg_email'] = $email; //Stores email into session variable
 
     //Password
