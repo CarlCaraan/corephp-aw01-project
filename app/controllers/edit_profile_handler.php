@@ -108,10 +108,18 @@ if (isset($_POST['edit_profile'])) {
         $e_check = mysqli_query($con, "SELECT email FROM users WHERE email='$email'");
         $num_rows = mysqli_num_rows($e_check);
 
-        if ($email == $e_check  && $num_rows > 0) {
-            $error_array = "1";
-            flash("error", "Email already in use!");
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        // Get current Email
+        $current_email_query = mysqli_query($con, "SELECT email FROM users WHERE username='$userLoggedIn'");
+        $current_email = mysqli_fetch_array($current_email_query);;
+
+        if ($current_email['email'] == $email) {
+            //do nothing
+        } else {
+            if ($num_rows > 0) {
+                $error_array = "1";
+                flash("error", "Email already in use!");
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            }
         }
     } else {
         $error_array = "1";
@@ -127,19 +135,27 @@ if (isset($_POST['edit_profile'])) {
     $num_card = mysqli_num_rows($card_check); // return 1
 
     if ($personal['mobile'] == $mobile) {
+        if ($personal['card_number'] == $card_number) {
+        } else {
+            if ($num_card > 0) {
+                $error_array = "1";
+                flash("error", "Card Number is already registered!");
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            }
+        }
     } else {
         if ($num_mobile > 0) {
             $error_array = "1";
-            flash("error", "Mobile is already registered!");
+            flash("error", "Mobile Number is already registered!");
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
-    }
-    if ($personal['card_number'] == $card_number) {
-    } else {
-        if ($num_card > 0) {
-            $error_array = "1";
-            flash("error", "Card Number is already registered!");
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        if ($personal['card_number'] == $card_number) {
+        } else {
+            if ($num_card > 0) {
+                $error_array = "1";
+                flash("error", "Card Number is already registered!");
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            }
         }
     }
     //-- End Validation Message --//
