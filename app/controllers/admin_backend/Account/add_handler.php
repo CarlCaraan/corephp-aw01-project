@@ -28,7 +28,7 @@ if (isset($_POST['add_account'])) {
     //email
     $email = strip_tags($_POST['email']); //Remove html tags
     $email = str_replace(' ', '', $email); //remove spaces
-    $email = ucfirst(strtolower($email)); //Uppercase first letter
+    $email = strtolower($email); //Uppercase first letter
     $_SESSION['email'] = $email; //Stores email into session variable
 
     //Position

@@ -54,6 +54,7 @@ if (isset($_POST['edit_profile'])) {
     $address = strip_tags($_POST['address']);
 
     $email = strip_tags($_POST['email']);
+    $email = str_replace(' ', '', $email);
     $email = strtolower($email);
 
     $dob = strip_tags($_POST['dob']);
