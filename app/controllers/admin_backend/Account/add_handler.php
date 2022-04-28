@@ -93,10 +93,19 @@ if (isset($_POST['add_account'])) {
 
         $fetch = mysqli_query($con, "SELECT * from users WHERE email='$email'");
         $row = mysqli_fetch_array($fetch);
-        $id = $row['id'];
+        $user_id = $row['id'];
+
+        // Generate Card Number
+        if ($user_id < 10) {
+            $card_number = date("Y") . '-000' . $user_id;
+        } elseif ($user_id < 100) {
+            $card_number = date("Y") . '-00' . $user_id;
+        } elseif ($user_id < 1000) {
+            $card_number = date("Y") . '-0' . $user_id;
+        }
 
         $query1 = mysqli_query($con, "INSERT INTO personal VALUES (
-			'', '$id','','','','','','','','','','','','','','','','','',''
+			'', '$user_id','','','','','','$card_number','','','','','','','','','','','',''
 		)");
 
         //Register Successful Message
