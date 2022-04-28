@@ -135,30 +135,34 @@ if (isset($_POST['edit_profile'])) {
     $card_check = mysqli_query($con, "SELECT card_number FROM personal WHERE card_number='$card_number'");
     $num_card = mysqli_num_rows($card_check); // return 1
 
-    if ($personal['mobile'] == $mobile) {
-        if ($personal['card_number'] == $card_number) {
+    if ($mobile == "" || $card_number == "") {
+    } else {
+        if ($personal['mobile'] == $mobile) {
+            if ($personal['card_number'] == $card_number) {
+            } else {
+                if ($num_card > 0) {
+                    $error_array = "1";
+                    flash("error", "Card Number is already registered!");
+                    header('Location: ' . $_SERVER['HTTP_REFERER']);
+                }
+            }
         } else {
-            if ($num_card > 0) {
+            if ($num_mobile > 0) {
                 $error_array = "1";
-                flash("error", "Card Number is already registered!");
+                flash("error", "Mobile Number is already registered!");
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
             }
-        }
-    } else {
-        if ($num_mobile > 0) {
-            $error_array = "1";
-            flash("error", "Mobile Number is already registered!");
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-        }
-        if ($personal['card_number'] == $card_number) {
-        } else {
-            if ($num_card > 0) {
-                $error_array = "1";
-                flash("error", "Card Number is already registered!");
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            if ($personal['card_number'] == $card_number) {
+            } else {
+                if ($num_card > 0) {
+                    $error_array = "1";
+                    flash("error", "Card Number is already registered!");
+                    header('Location: ' . $_SERVER['HTTP_REFERER']);
+                }
             }
         }
     }
+
     //-- End Validation Message --//
 
     // Working with Image

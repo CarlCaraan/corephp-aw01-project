@@ -139,20 +139,23 @@ if (isset($_POST['add_customer'])) {
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 
-    if ($personal['mobile'] == $mobile) {
+    if ($mobile == "" && $card_number == "") {
     } else {
-        if ($num_mobile > 0) {
-            $error_array = "1";
-            flash("error", "Mobile is already registered!");
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        if ($personal['mobile'] == $mobile) {
+        } else {
+            if ($num_mobile > 0) {
+                $error_array = "1";
+                flash("error", "Mobile is already registered!");
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            }
         }
-    }
-    if ($personal['card_number'] == $card_number) {
-    } else {
-        if ($num_card > 0) {
-            $error_array = "1";
-            flash("error", "Card Number is already registered!");
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        if ($personal['card_number'] == $card_number) {
+        } else {
+            if ($num_card > 0) {
+                $error_array = "1";
+                flash("error", "Card Number is already registered!");
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            }
         }
     }
 
@@ -182,9 +185,6 @@ if (isset($_POST['add_customer'])) {
             flash("error", "File size must be 5 MB or less!");
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
-        unlink('../../../../resources/img/uploads/' . $personal['image']);
-    } else {
-        $file_name = $personal['image'];
     }
 
     //-- Inserting Data --//
