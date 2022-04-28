@@ -11,7 +11,6 @@ $address = "";
 $email = "";
 $dob = "";
 $mobile = "";
-$card_number = "";
 $mother_name = "";
 $father_name = "";
 $spouse_name = "";
@@ -60,8 +59,6 @@ if (isset($_POST['edit_profile'])) {
     $dob = strip_tags($_POST['dob']);
 
     $mobile = strip_tags($_POST['mobile']);
-
-    $card_number = strip_tags($_POST['card_number']);
 
     $mother_name = strip_tags($_POST['mother_name']);
     $mother_name = str_replace(' ', '', $mother_name);
@@ -136,27 +133,11 @@ if (isset($_POST['edit_profile'])) {
     $num_card = mysqli_num_rows($card_check); // return 1
 
     if ($personal['mobile'] == $mobile) {
-        if ($personal['card_number'] == $card_number) {
-        } else {
-            if ($num_card > 0) {
-                $error_array = "1";
-                flash("error", "Card Number is already registered!");
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
-            }
-        }
     } else {
         if ($num_mobile > 0) {
             $error_array = "1";
             flash("error", "Mobile Number is already registered!");
             header('Location: ' . $_SERVER['HTTP_REFERER']);
-        }
-        if ($personal['card_number'] == $card_number) {
-        } else {
-            if ($num_card > 0) {
-                $error_array = "1";
-                flash("error", "Card Number is already registered!");
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
-            }
         }
     }
 
@@ -197,7 +178,7 @@ if (isset($_POST['edit_profile'])) {
 
         $user_query = mysqli_query($con, "UPDATE users SET first_name='$first_name', last_name='$last_name', email='$email' WHERE username='$userLoggedIn'");
         $personal_query = mysqli_query($con, "UPDATE personal SET middle_name='$middle_name', category='$category', address='$address', dob='$dob', mobile='$mobile',
-            card_number='$card_number', mother_name='$mother_name', father_name='$father_name', spouse_name='$spouse_name', contact_person='$contact_person',
+            mother_name='$mother_name', father_name='$father_name', spouse_name='$spouse_name', contact_person='$contact_person',
             contact_number='$contact_number', s_contact_number='$s_contact_number', company_affiliated='$company_affiliated', company_address='$company_address',
             company_number='$company_number', position='$position', work_status='$work_status', image='$file_name' WHERE user_id='$id'");
 

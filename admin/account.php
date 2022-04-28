@@ -186,7 +186,7 @@ include("../classes/User.php");
                                                                                 <h2 class="text-light display-6"><?php echo $row['first_name'] . " " . $row['last_name'] ?></h2>
                                                                                 <p><?php echo $row['usertype'] ?><br />
                                                                                     <?php echo $row['mobile'] ?><br />
-                                                                                    Birthday: <?php echo $row['dob'] ?><br />
+                                                                                    <small class="border-bottom ">Card Number: <?php echo $row['card_number'] ?></small><br />
                                                                                 </p>
                                                                             </div>
                                                                         </div>

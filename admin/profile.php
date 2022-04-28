@@ -337,10 +337,6 @@ include("../classes/User.php");
                                     <label for="mobile" class="control-label mb-1">Telephone/Mobile Number</label>
                                     <input id="mobile" name="mobile" type="text" class="form-control" placeholder="Telephone/Mobile Number" value="<?php echo $personal['mobile']; ?>">
                                 </div>
-                                <div class="col-sm-4">
-                                    <label for="card_number" class="control-label mb-1">ID Card Number</label>
-                                    <input id="card_number" name="card_number" type="text" class="form-control" placeholder="ID Card Number" value="<?php echo $personal['card_number']; ?>">
-                                </div>
                             </div>
 
                             <div class="row">

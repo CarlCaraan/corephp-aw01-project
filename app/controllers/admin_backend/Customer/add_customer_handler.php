@@ -69,8 +69,6 @@ if (isset($_POST['add_customer'])) {
 
     $mobile = strip_tags($_POST['mobile']);
 
-    $card_number = strip_tags($_POST['card_number']);
-
     $mother_name = strip_tags($_POST['mother_name']);
     $mother_name = str_replace(' ', '', $mother_name);
     $mother_name = ucfirst(strtolower($mother_name));
@@ -105,11 +103,6 @@ if (isset($_POST['add_customer'])) {
 
     //-- Start Validation Message --//
     // Check Mobile and Card Number is Unique
-    $m_check = mysqli_query($con, "SELECT mobile FROM personal where mobile=$mobile");
-    $num_mobile = mysqli_num_rows($m_check); // return 1
-
-    $card_check = mysqli_query($con, "SELECT card_number FROM personal WHERE card_number='$card_number'");
-    $num_card = mysqli_num_rows($card_check); // return 1
     if (strlen($first_name) > 25 || strlen($first_name) < 2) {
         $error_array = "1";
         flash("error", "First Name must be between 2 and 25 characters!");
@@ -128,9 +121,21 @@ if (isset($_POST['add_customer'])) {
         //Count the number of rows returned
         $num_rows = mysqli_num_rows($e_check);
 
+        //Check if mobile already exist
+        $m_check = mysqli_query($con, "SELECT mobile FROM personal where mobile=$mobile");
+        $num_mobile = mysqli_num_rows($m_check); // return 1
+
         if ($num_rows > 0) {
             $error_array = "1";
             flash("error", "Email already in use!");
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        } else if ($mobile == "") {
+            $error_array = "1";
+            flash("error", "Mobile Field is required!");
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        } else if ($num_mobile > 0) {
+            $error_array = "1";
+            flash("error", "Mobile is already registered!");
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
     } else {
@@ -138,27 +143,6 @@ if (isset($_POST['add_customer'])) {
         flash("error", "Invalid Email Format!");
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
-
-    if ($mobile == "" && $card_number == "") {
-    } else {
-        if ($personal['mobile'] == $mobile) {
-        } else {
-            if ($num_mobile > 0) {
-                $error_array = "1";
-                flash("error", "Mobile is already registered!");
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
-            }
-        }
-        if ($personal['card_number'] == $card_number) {
-        } else {
-            if ($num_card > 0) {
-                $error_array = "1";
-                flash("error", "Card Number is already registered!");
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
-            }
-        }
-    }
-
     //-- End Validation Message --//
 
     // Working with Image
@@ -210,6 +194,15 @@ if (isset($_POST['add_customer'])) {
         $fetch = mysqli_query($con, "SELECT * from users WHERE username='$username'");
         $row = mysqli_fetch_array($fetch);
         $user_id = $row['id'];
+
+        // Generate Card Number
+        if ($user_id < 10) {
+            $card_number = date("Y") . '-000' . $user_id;
+        } elseif ($user_id < 100) {
+            $card_number = date("Y") . '-00' . $user_id;
+        } elseif ($user_id < 1000) {
+            $card_number = date("Y") . '-0' . $user_id;
+        }
 
         $personal_query = mysqli_query($con, "INSERT INTO personal (personal_id ,user_id, middle_name, category, address, dob, mobile,card_number, mother_name, father_name, spouse_name, contact_person,
             contact_number, s_contact_number, company_affiliated, company_address,company_number, position, work_status, image)
