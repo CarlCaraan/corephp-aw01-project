@@ -15,6 +15,7 @@ if (isset($_POST['login_button'])) {
     $row = mysqli_fetch_array($check_data_query);
     $status = $row['status'];
     $usertype = $row['usertype'];
+    $id = $row['id'];
 
     if ($status == "Pending") {
         array_push($error_array, "Your account is not yet approved!<br>");
@@ -25,6 +26,9 @@ if (isset($_POST['login_button'])) {
         $username = $row['username'];
         $_SESSION['username'] = $username;
 
+        $login_details_query = mysqli_query($con, "INSERT INTO login_details (user_id) VALUES ($id)");
+        $_SESSION['login_details_id'] = mysqli_insert_id($con);
+
         header("Location: admin/dashboard");
         exit();
     } else if ($check_login_query == 1 && $usertype == "Branch Manager") { //Login query
@@ -32,12 +36,16 @@ if (isset($_POST['login_button'])) {
         $username = $row['username'];
         $_SESSION['username'] = $username;
 
+        $login_details_query = mysqli_query($con, "INSERT INTO login_details (user_id) VALUES ($id)");
+
         header("Location: branch_manager/dashboard");
         exit();
     } else if ($check_login_query == 1 && $usertype == "Staff") { //Login query
         $row = mysqli_fetch_array($check_database_query);
         $username = $row['username'];
         $_SESSION['username'] = $username;
+
+        $login_details_query = mysqli_query($con, "INSERT INTO login_details (user_id) VALUES ($id)");
 
         header("Location: staff/dashboard");
         exit();
