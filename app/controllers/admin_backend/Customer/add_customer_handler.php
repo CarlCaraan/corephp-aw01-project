@@ -211,7 +211,7 @@ if (isset($_POST['add_customer'])) {
         $row = mysqli_fetch_array($fetch);
         $user_id = $row['id'];
 
-        $personal_query = mysqli_query($con, "INSERT INTO personal (id ,user_id, middle_name, category, address, dob, mobile,card_number, mother_name, father_name, spouse_name, contact_person,
+        $personal_query = mysqli_query($con, "INSERT INTO personal (personal_id ,user_id, middle_name, category, address, dob, mobile,card_number, mother_name, father_name, spouse_name, contact_person,
             contact_number, s_contact_number, company_affiliated, company_address,company_number, position, work_status, image)
             VALUES ('','$user_id', '$middle_name', '$category','$address','$dob','$mobile','$card_number','$mother_name','$father_name' ,'$spouse_name' ,'$contact_person','$contact_number','$s_contact_number'
             ,'$company_affiliated','$company_address','$company_number','$position','$work_status','$file_name')");
