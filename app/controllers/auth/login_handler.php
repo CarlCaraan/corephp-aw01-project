@@ -37,6 +37,7 @@ if (isset($_POST['login_button'])) {
         $_SESSION['username'] = $username;
 
         $login_details_query = mysqli_query($con, "INSERT INTO login_details (user_id) VALUES ($id)");
+        $_SESSION['login_details_id'] = mysqli_insert_id($con);
 
         header("Location: branch_manager/dashboard");
         exit();
@@ -46,6 +47,7 @@ if (isset($_POST['login_button'])) {
         $_SESSION['username'] = $username;
 
         $login_details_query = mysqli_query($con, "INSERT INTO login_details (user_id) VALUES ($id)");
+        $_SESSION['login_details_id'] = mysqli_insert_id($con);
 
         header("Location: staff/dashboard");
         exit();
