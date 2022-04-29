@@ -87,7 +87,7 @@ include("../classes/User.php");
                 </thead>
                 <tbody>
                     <?php
-                    $sql = "SELECT * FROM users INNER JOIN personal ON personal.user_id = users.id ORDER BY username";
+                    $sql = "SELECT * FROM users INNER JOIN personal ON personal.user_id = users.id";
                     $result = $con->query($sql);
 
                     if ($result->num_rows > 0) {

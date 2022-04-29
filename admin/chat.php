@@ -126,7 +126,7 @@ include("../classes/User.php");
 
                       <div class="bg-gray px-4 py-2 bg-light">
                         <input type="hidden" id="is_active_group_chat_window" value="no" />
-                        <button type="button" name="group_chat" id="group_chat" class="btn btn-info btn-sm float-right">Group Chat</button>
+                        <button type="button" name="group_chat" id="group_chat" class="btn btn-info btn-sm float-right"><i class="ti-crown"></i> Group Chat</button>
                         <p class="h5 mb-0 py-1">Recent</p>
                       </div>
 
@@ -141,7 +141,12 @@ include("../classes/User.php");
                   <!-- Chat Box-->
                   <div class="col-7 px-0">
                     <div class="px-4 py-5 bg-white">
-                      <div class="col" id="user_model_details"></div>
+                      <div class="col" id="user_model_details">
+                        <h4 class="text-center text-secondary mt-5"><i class="ti-info-alt"></i> Select a user to start a conversation.</h4>
+                      </div>
+
+
+
                     </div>
                   </div>
 
@@ -157,6 +162,30 @@ include("../classes/User.php");
 
     </div>
     <!-- End Chat Content  -->
+
+    <!-- Start GroupChat Content -->
+    <div id="group_chat_dialog" title="Group Chat Window (Admin Only)">
+      <div id="group_chat_history" style="height:400px; border:1px solid #ccc; overflow-y: scroll; margin-bottom:24px; padding:16px;">
+
+      </div>
+      <div class="form-group">
+        <div class="chat_message_area">
+          <div id="group_chat_message" contenteditable class="form-control">
+
+          </div>
+          <div class="image_upload">
+            <form id="uploadImage" method="post" action="../app/ajax_chat/upload.php">
+              <label class="float-right" for="uploadFile"><i class="ti-cloud-up"></i></label>
+              <input style="opacity: 0;" type="file" name="uploadFile" id="uploadFile" accept=".jpg, .png" />
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" align="right">
+        <button type="button" name="send_group_chat" id="send_group_chat" class="btn btn-info btn-sm rounded"><i class="ti-location-arrow"></i> Send</button>
+      </div>
+    </div>
+    <!-- End GroupChat Content -->
 
   </div><!-- /#right-panel -->
 
@@ -232,7 +261,7 @@ include("../classes/User.php");
         modal_content += '<div class="form-group">';
         modal_content += '<textarea name="chat_message_' + to_user_id + '" id="chat_message_' + to_user_id + '" class="form-control chat_message"></textarea>';
         modal_content += '</div><div class="form-group" align="right">';
-        modal_content += '<button type="button" name="send_chat" id="' + to_user_id + '" class="btn btn-info send_chat">Send</button></div></div>';
+        modal_content += '<button type="button" name="send_chat" id="' + to_user_id + '" class="btn btn-info send_chat rounded"><i class="ti-location-arrow"></i> Send</button></div></div>';
         $('#user_model_details').html(modal_content);
       }
 
@@ -328,61 +357,61 @@ include("../classes/User.php");
       });
 
       // === Group Chat ===
-      // $('#group_chat_dialog').dialog({
-      //   autoOpen: false,
-      //   width: 400
-      // });
+      $('#group_chat_dialog').dialog({
+        autoOpen: false,
+        width: 400
+      });
 
-      // $('#group_chat').click(function() {
-      //   $('#group_chat_dialog').dialog('open');
-      //   $('#is_active_group_chat_window').val('yes');
-      //   fetch_group_chat_history();
-      // });
+      $('#group_chat').click(function() {
+        $('#group_chat_dialog').dialog('open');
+        $('#is_active_group_chat_window').val('yes');
+        fetch_group_chat_history();
+      });
 
-      // $('#send_group_chat').click(function() {
-      //   var chat_message = $.trim($('#group_chat_message').html());
-      //   var action = 'insert_data';
-      //   if (chat_message != '') {
-      //     $.ajax({
-      //       url: "group_chat.php",
-      //       method: "POST",
-      //       data: {
-      //         chat_message: chat_message,
-      //         action: action
-      //       },
-      //       success: function(data) {
-      //         $('#group_chat_message').html('');
-      //         $('#group_chat_history').html(data);
-      //       }
-      //     })
-      //   } else {
-      //     alert('Type something');
-      //   }
-      // });
+      $('#send_group_chat').click(function() {
+        var chat_message = $.trim($('#group_chat_message').html());
+        var action = 'insert_data';
+        if (chat_message != '') {
+          $.ajax({
+            url: "../app/ajax_chat/group_chat.php",
+            method: "POST",
+            data: {
+              chat_message: chat_message,
+              action: action
+            },
+            success: function(data) {
+              $('#group_chat_message').html('');
+              $('#group_chat_history').html(data);
+            }
+          })
+        } else {
+          alert('Type something');
+        }
+      });
 
-      // function fetch_group_chat_history() {
-      //   var group_chat_dialog_active = $('#is_active_group_chat_window').val();
-      //   var action = "fetch_data";
-      //   if (group_chat_dialog_active == 'yes') {
-      //     $.ajax({
-      //       url: "group_chat.php",
-      //       method: "POST",
-      //       data: {
-      //         action: action
-      //       },
-      //       success: function(data) {
-      //         $('#group_chat_history').html(data);
-      //       }
-      //     })
-      //   }
-      // }
+      function fetch_group_chat_history() {
+        var group_chat_dialog_active = $('#is_active_group_chat_window').val();
+        var action = "fetch_data";
+        if (group_chat_dialog_active == 'yes') {
+          $.ajax({
+            url: "../app/ajax_chat/group_chat.php",
+            method: "POST",
+            data: {
+              action: action
+            },
+            success: function(data) {
+              $('#group_chat_history').html(data);
+            }
+          })
+        }
+      }
 
-      // $('#uploadFile').on('change', function() {
-      //   $('#uploadImage').ajaxSubmit({
-      //     target: "#group_chat_message",
-      //     resetForm: true
-      //   });
-      // });
+      $('#uploadFile').on('change', function() {
+        $('#uploadImage').ajaxSubmit({
+          target: "#group_chat_message",
+          resetForm: true
+        });
+      });
 
       $(document).on('click', '.remove_chat', function() {
         var chat_message_id = $(this).attr('id');

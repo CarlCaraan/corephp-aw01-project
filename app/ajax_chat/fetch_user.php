@@ -6,7 +6,7 @@ require('../config/connect.php');
 
 $query = "
 SELECT * FROM users INNER JOIN personal ON users.id = personal.user_id 
-WHERE id != '" . $_SESSION['id'] . "'
+WHERE id != '" . $_SESSION['id'] . "' AND status='Verified'
 ";
 
 $statement = $connect->prepare($query);
@@ -35,6 +35,12 @@ foreach ($result as $row) {
 	} else {
 		$image = '../resources/img/uploads/' . $row['image'];
 	}
+	$count_message = count_unseen_message($row['id'], $_SESSION['id'], $connect);
+	if ($count_message == NULL) {
+		$count_message = '';
+	} else {
+		$count_message = ' <span class="badge badge-danger">' . $count_message . '</span>';
+	}
 
 	$output .= '
 		<a class=" start_chat list-group-item list-group-item-action text-white rounded-0" data-touserid="' . $row['id'] . '" data-tousername="' . $row['first_name'] . "" . $row['last_name'] . '">
@@ -42,7 +48,9 @@ foreach ($result as $row) {
 			<div class="media-body ml-4">
 			<div class="d-flex align-items-center justify-content-between mb-1">
 				<h6 class="mb-0 text-dark">
-				' . $row['first_name'] . ' ' . $row['last_name'] . count_unseen_message($row['id'], $_SESSION['id'], $connect) . ' ' . fetch_is_type_status($row['id'], $connect) . '
+				' . $row['first_name'] . ' ' . $row['last_name'] .
+		$count_message
+		. ' ' . fetch_is_type_status($row['id'], $connect) . '
 				</h6>
 				' . $status . '
 			</div>
