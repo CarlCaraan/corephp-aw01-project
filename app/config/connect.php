@@ -74,9 +74,9 @@ function fetch_user_chat_history($from_user_id, $to_user_id, $connect)
 			-webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
 			-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
 		' . $dynamic_background . '">
-			<p class="text-dark">' . $user_name . ' - ' . $chat_message . '
+			<p style="' . $timestamp_color . '">' . $user_name . ' - ' . $chat_message . '
 				<div align="right">
-					- <small style="' . $timestamp_color . '">' . $row['timestamp'] . '</small>
+					<small style="' . $timestamp_color . '">- ' . $row['timestamp'] . '</small>
 				</div>
 			</p>
 		</li>
@@ -166,10 +166,10 @@ function fetch_group_chat_history($connect)
 		if ($row["from_user_id"] == $_SESSION["id"]) {
 			if ($row["status"] == '2') {
 				$chat_message = '<em>This message has been removed</em>';
-				$user_name = '<b class="text-dark">You</b>';
+				$user_name = '<b class="text-white">You</b>';
 			} else {
 				$chat_message = $row["chat_message"];
-				$user_name = '<button type="button" class="btn btn-secondary btn-sm rounded remove_chat float-right" id="' . $row['chat_message_id'] . '">x</button>&nbsp;<b class="text-dark">You</b>';
+				$user_name = '<button type="button" class="btn btn-secondary btn-sm rounded remove_chat float-right" id="' . $row['chat_message_id'] . '">x</button>&nbsp;<b class="text-white">You</b>';
 			}
 
 			$dynamic_background = 'background-color:#007BFF;';
@@ -180,7 +180,7 @@ function fetch_group_chat_history($connect)
 			} else {
 				$chat_message = $row["chat_message"];
 			}
-			$user_name = '<b class="text-danger">' . get_user_name($row['from_user_id'], $connect) . '</b>';
+			$user_name = '<b class="text-dark">' . get_user_name($row['from_user_id'], $connect) . '</b>';
 			$dynamic_background = 'background-color:#F8F9FA;';
 			$timestamp_color = 'color: black;';
 		}
@@ -192,9 +192,9 @@ function fetch_group_chat_history($connect)
 			-webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
 			-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
 		' . $dynamic_background . '">
-			<p class="text-dark">' . $user_name . ' - ' . $chat_message . ' 
+			<p style="' . $timestamp_color . '">' . $user_name . ' - ' . $chat_message . ' 
 				<div align="right">
-					- <small style="' . $timestamp_color . '">' . $row['timestamp'] . '</small>
+					<small style="' . $timestamp_color . '">- ' . $row['timestamp'] . '</small>
 				</div>
 			</p>
 		</li>
