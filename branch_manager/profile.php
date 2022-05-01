@@ -135,7 +135,6 @@ include("../classes/User.php");
             $personal = mysqli_fetch_array($personal_details_query);
             ?>
 
-
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body">

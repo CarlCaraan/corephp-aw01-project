@@ -13,7 +13,7 @@ if (isset($_SESSION['username'])) {
     $_SESSION['id'] = $id;
 
     //Authorized for Admin only
-    if ($user["usertype"] == "Admin") {
+    if ($user["usertype"] == "Branch Manager") {
         define('USERSITE', true);
     }
 } else {

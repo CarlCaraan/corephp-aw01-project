@@ -48,8 +48,7 @@ foreach ($result as $row) {
 			<div class="media-body ml-4">
 			<div class="d-flex align-items-center justify-content-between mb-1">
 				<h6 class="mb-0 text-dark">
-				' . $row['first_name'] . ' ' . $row['last_name'] .
-		$count_message
+				' . $row['first_name'] . ' ' . $row['last_name'] . "<small class='text-secondary'> (" . $row['usertype'] . ")</small>" . $count_message
 		. ' ' . fetch_is_type_status($row['id'], $connect) . '
 				</h6>
 				' . $status . '

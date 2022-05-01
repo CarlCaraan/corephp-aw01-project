@@ -1,474 +1,210 @@
+<?php
+require("../app/config/connect.php");
+include("../classes/User.php");
+?>
+
 <!doctype html>
 <html class="no-js" lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>WEB AND DATABASE</title>
-    <meta name="description" content="WEB AND DATABASE">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chat | App</title>
+  <meta name="description" content="WEB AND DATABASE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" href="../resources/img/login.png">
   <!--   <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico"> -->
 
-    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="vendors/themify-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
-    <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="vendors/jqvmap/dist/jqvmap.min.css">
+  <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="vendors/themify-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
+  <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
+  <link rel="stylesheet" href="vendors/jqvmap/dist/jqvmap.min.css">
 
 
-    <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-<style>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+  <!-- START CHAT CSS AND SCRIPTS -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
+  <!-- End CHAT CSS AND SCRIPTS -->
+  <style>
     ::-webkit-scrollbar {
-  width: 5px;
-}
+      width: 5px;
+    }
 
-::-webkit-scrollbar-track {
-  width: 5px;
-  background: #f5f5f5;
-}
+    ::-webkit-scrollbar-track {
+      width: 5px;
+      background: #f5f5f5;
+    }
 
-::-webkit-scrollbar-thumb {
-  width: 1em;
-  background-color: #ddd;
-  outline: 1px solid slategrey;
-  border-radius: 1rem;
-}
+    ::-webkit-scrollbar-thumb {
+      width: 1em;
+      background-color: #ddd;
+      outline: 1px solid slategrey;
+      border-radius: 1rem;
+    }
 
-.text-small {
-  font-size: 0.9rem;
-}
+    .text-small {
+      font-size: 0.9rem;
+    }
 
-.messages-box,
-.chat-box {
-  height: 510px;
-  overflow-y: scroll;
-}
+    .messages-box,
+    .chat-box {
+      height: 510px;
+      overflow-y: scroll;
+    }
 
-.rounded-lg {
-  border-radius: 0.5rem;
-}
+    .rounded-lg {
+      border-radius: 0.5rem;
+    }
 
-input::placeholder {
-  font-size: 0.9rem;
-  color: #999;
-}
-</style>
+    input::placeholder {
+      font-size: 0.9rem;
+      color: #999;
+    }
+  </style>
 </head>
 
 <body>
+  <?php
+  $toggle_active = "chat";
+  ?>
 
+  <!-- Left Panel -->
+  <?php
+  include "./body/sidebar.php"
+  ?>
+  <!-- Left Panel -->
 
-    <!-- Left Panel -->
+  <!-- Right Panel -->
 
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
+  <div id="right-panel" class="right-panel">
 
-            <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="./"><img src="images/logo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
-            </div>
+    <!-- Header-->
+    <?php
+    include "./body/header.php"
+    ?>
+    <!-- Header-->
 
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="dashboard.php"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Costumer</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-credit-card"></i><a href="add_costumer.php">Add Costumer</a></li>
-                            <li><i class="fa fa-credit-card"></i><a href="atm.php">ATM</a></li>
-                            <li><i class="fa fa-money"></i><a href="sps.php">SPS</a></li>
-                            <li><i class="fa fa-bars"></i><a href="spsv1.php">SPSV1</a></li>
-                        </ul>
-                    </li> 
-                     <li class="active">
-                        <a href="#"> <i class="menu-icon fa fa-envelope"></i>Chat</a>
-                    </li>
-                    <li>
-                        <a href="account.php"> <i class="menu-icon fa fa-users"></i>Account</a>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside><!-- /#left-panel -->
-
-    <!-- Left Panel -->
-
-    <!-- Right Panel -->
-
-    <div id="right-panel" class="right-panel">
-
-        <!-- Header-->
-        <header id="header" class="header">
-
-            <div class="header-menu">
-
-                <div class="col-sm-7">
-                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
-                    <div class="header-left">
-                        <button class="search-trigger"><i class="fa fa-search"></i></button>
-                        <div class="form-inline">
-                            <form class="search-form">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
-                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
-                            </form>
-                        </div>
-
-                        <div class="dropdown for-notification">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-bell"></i>
-                                <span class="count bg-danger">5</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="notification">
-                                <p class="red">You have 3 Notification</p>
-                                <a class="dropdown-item media bg-flat-color-1" href="#">
-                                <i class="fa fa-check"></i>
-                                <p>Server #1 overloaded.</p>
-                            </a>
-                                <a class="dropdown-item media bg-flat-color-4" href="#">
-                                <i class="fa fa-info"></i>
-                                <p>Server #2 overloaded.</p>
-                            </a>
-                                <a class="dropdown-item media bg-flat-color-5" href="#">
-                                <i class="fa fa-warning"></i>
-                                <p>Server #3 overloaded.</p>
-                            </a>
-                            </div>
-                        </div>
-
-                        <div class="dropdown for-message">
-                            <button class="btn btn-secondary dropdown-toggle" type="button"
-                                id="message"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ti-email"></i>
-                                <span class="count bg-primary">9</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="message">
-                                <p class="red">You have 4 Mails</p>
-                                <a class="dropdown-item media bg-flat-color-1" href="#">
-                                <span class="photo media-left"><img alt="avatar" src="images/avatar/1.jpg"></span>
-                                <span class="message media-body">
-                                    <span class="name float-left">Jonathan Smith</span>
-                                    <span class="time float-right">Just now</span>
-                                        <p>Hello, this is an example msg</p>
-                                </span>
-                            </a>
-                                <a class="dropdown-item media bg-flat-color-4" href="#">
-                                <span class="photo media-left"><img alt="avatar" src="images/avatar/2.jpg"></span>
-                                <span class="message media-body">
-                                    <span class="name float-left">Jack Sanders</span>
-                                    <span class="time float-right">5 minutes ago</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                </span>
-                            </a>
-                                <a class="dropdown-item media bg-flat-color-5" href="#">
-                                <span class="photo media-left"><img alt="avatar" src="images/avatar/3.jpg"></span>
-                                <span class="message media-body">
-                                    <span class="name float-left">Cheryl Wheeler</span>
-                                    <span class="time float-right">10 minutes ago</span>
-                                        <p>Hello, this is an example msg</p>
-                                </span>
-                            </a>
-                                <a class="dropdown-item media bg-flat-color-3" href="#">
-                                <span class="photo media-left"><img alt="avatar" src="images/avatar/4.jpg"></span>
-                                <span class="message media-body">
-                                    <span class="name float-left">Rachel Santos</span>
-                                    <span class="time float-right">15 minutes ago</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                </span>
-                            </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-5">
-                    <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
-                        </a>
-
-                        <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </header><!-- /header -->
-        <!-- Header-->
-
-        <div class="breadcrumbs">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Dashboard</h1>
-                    </div>
-                </div>
-            </div>
+    <div class="breadcrumbs">
+      <div class="col-sm-4">
+        <div class="page-header float-left">
+          <div class="page-title">
+            <h1>Chat</h1>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="content mt-3">
+    <!-- Start Chat Content  -->
+    <div class="content mt-3">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-body">
+            <h3>Message Me!!!</h3><br />
+            <br />
 
-           <!--  <div class="col-sm-12">
-                <div class="alert  alert-success alert-dismissible fade show" role="alert">
-                    <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert message.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
- -->
-            <!--/.col-->
+            <!-- chat -->
+            <div class="chart-wrapper">
+              <div class="container py-2 px-4">
+                <!-- For demo purpose-->
 
-            
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <h4 class="card-title mb-0">Message Me!!!</h4>
-                            </div>
-                            <!--/.col-->
-                            
-                            <!--/.col-->
+                <div class="row rounded-lg overflow-hidden shadow">
+                  <!-- Users box-->
+                  <div class="col-5 px-0">
+                    <div class="bg-white">
 
+                      <div class="bg-gray px-4 py-2 bg-light">
+                        <input type="hidden" id="is_active_group_chat_window" value="no" />
+                        <button type="button" name="group_chat" id="group_chat" class="btn btn-info btn-sm float-right"><i class="ti-crown"></i> Moderators</button>
+                        <p class="h5 mb-0 py-1">Recent</p>
+                      </div>
 
+                      <div class="messages-box">
+                        <div class="list-group rounded-0">
+                          <div class="col" id="user_details"></div>
                         </div>
-                        <!--/.row-->
-                        <!-- chat -->
-                        <div class="chart-wrapper mt-4">
-                           <div class="container py-2 px-4">
-                              <!-- For demo purpose-->
-
-                              <div class="row rounded-lg overflow-hidden shadow">
-                                <!-- Users box-->
-                                <div class="col-5 px-0">
-                                  <div class="bg-white">
-
-                                    <div class="bg-gray px-4 py-2 bg-light">
-                                      <p class="h5 mb-0 py-1">Recent</p>
-                                    </div>
-
-                                    <div class="messages-box">
-                                      <div class="list-group rounded-0">
-                                        <a class="list-group-item list-group-item-action active text-white rounded-0">
-                                          <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
-                                            <div class="media-body ml-4">
-                                              <div class="d-flex align-items-center justify-content-between mb-1">
-                                                <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">25 Dec</small>
-                                              </div>
-                                              <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                            </div>
-                                          </div>
-                                        </a>
-
-                                        <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
-                                          <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
-                                            <div class="media-body ml-4">
-                                              <div class="d-flex align-items-center justify-content-between mb-1">
-                                                <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">14 Dec</small>
-                                              </div>
-                                              <p class="font-italic text-muted mb-0 text-small">Lorem ipsum dolor sit amet, consectetur. incididunt ut labore.</p>
-                                            </div>
-                                          </div>
-                                        </a>
-
-                                        <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
-                                          <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
-                                            <div class="media-body ml-4">
-                                              <div class="d-flex align-items-center justify-content-between mb-1">
-                                                <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">9 Nov</small>
-                                              </div>
-                                              <p class="font-italic text-muted mb-0 text-small">consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                            </div>
-                                          </div>
-                                        </a>
-
-                                        <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
-                                          <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
-                                            <div class="media-body ml-4">
-                                              <div class="d-flex align-items-center justify-content-between mb-1">
-                                                <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">18 Oct</small>
-                                              </div>
-                                              <p class="font-italic text-muted mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                            </div>
-                                          </div>
-                                        </a>
-
-                                        <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
-                                          <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
-                                            <div class="media-body ml-4">
-                                              <div class="d-flex align-items-center justify-content-between mb-1">
-                                                <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">17 Oct</small>
-                                              </div>
-                                              <p class="font-italic text-muted mb-0 text-small">consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                            </div>
-                                          </div>
-                                        </a>
-
-                                        <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
-                                          <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
-                                            <div class="media-body ml-4">
-                                              <div class="d-flex align-items-center justify-content-between mb-1">
-                                                <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">2 Sep</small>
-                                              </div>
-                                              <p class="font-italic text-muted mb-0 text-small">Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                            </div>
-                                          </div>
-                                        </a>
-
-                                        <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
-                                          <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
-                                            <div class="media-body ml-4">
-                                              <div class="d-flex align-items-center justify-content-between mb-1">
-                                                <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">30 Aug</small>
-                                              </div>
-                                              <p class="font-italic text-muted mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                            </div>
-                                          </div>
-                                        </a>
-
-                                        <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
-                                          <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
-                                            <div class="media-body ml-4">
-                                              <div class="d-flex align-items-center justify-content-between mb-3">
-                                                <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">21 Aug</small>
-                                              </div>
-                                              <p class="font-italic text-muted mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                            </div>
-                                          </div>
-                                        </a>
-
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <!-- Chat Box-->
-                                <div class="col-7 px-0">
-                                  <div class="px-4 py-5 chat-box bg-white">
-                                    <!-- Sender Message-->
-                                    <div class="media w-50 mb-3"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
-                                      <div class="media-body ml-3">
-                                        <div class="bg-light rounded py-2 px-3 mb-2">
-                                          <p class="text-small mb-0 text-muted">Test which is a new approach all solutions</p>
-                                        </div>
-                                        <p class="small text-muted">12:00 PM | Aug 13</p>
-                                      </div>
-                                    </div>
-
-                                    <!-- Reciever Message-->
-                                    <div class="media w-50 ml-auto mb-3">
-                                      <div class="media-body">
-                                        <div class="bg-primary rounded py-2 px-3 mb-2">
-                                          <p class="text-small mb-0 text-white">Test which is a new approach to have all solutions</p>
-                                        </div>
-                                        <p class="small text-muted">12:00 PM | Aug 13</p>
-                                      </div>
-                                    </div>
-
-                                    <!-- Sender Message-->
-                                    <div class="media w-50 mb-3"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
-                                      <div class="media-body ml-3">
-                                        <div class="bg-light rounded py-2 px-3 mb-2">
-                                          <p class="text-small mb-0 text-muted">Test, which is a new approach to have</p>
-                                        </div>
-                                        <p class="small text-muted">12:00 PM | Aug 13</p>
-                                      </div>
-                                    </div>
-
-                                    <!-- Reciever Message-->
-                                    <div class="media w-50 ml-auto mb-3">
-                                      <div class="media-body">
-                                        <div class="bg-primary rounded py-2 px-3 mb-2">
-                                          <p class="text-small mb-0 text-white">Apollo University, Delhi, India Test</p>
-                                        </div>
-                                        <p class="small text-muted">12:00 PM | Aug 13</p>
-                                      </div>
-                                    </div>
-
-                                    <!-- Sender Message-->
-                                    <div class="media w-50 mb-3"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
-                                      <div class="media-body ml-3">
-                                        <div class="bg-light rounded py-2 px-3 mb-2">
-                                          <p class="text-small mb-0 text-muted">Test, which is a new approach</p>
-                                        </div>
-                                        <p class="small text-muted">12:00 PM | Aug 13</p>
-                                      </div>
-                                    </div>
-
-                                    <!-- Reciever Message-->
-                                    <div class="media w-50 ml-auto mb-3">
-                                      <div class="media-body">
-                                        <div class="bg-primary rounded py-2 px-3 mb-2">
-                                          <p class="text-small mb-0 text-white">Apollo University, Delhi, India Test</p>
-                                        </div>
-                                        <p class="small text-muted">12:00 PM | Aug 13</p>
-                                      </div>
-                                    </div>
-
-                                  </div>
-
-                                  <!-- Typing area -->
-                                  <form action="#" class="bg-light">
-                                    <div class="input-group">
-                                      <input type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
-                                      <div class="input-group-append">
-                                        <button id="button-addon2" type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
-                                      </div>
-                                    </div>
-                                  </form>
-                                  <br/><br/>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                        <!-- end chat -->
+                      </div>
                     </div>
-                  
+                  </div>
+
+                  <!-- Chat Box-->
+                  <div class="col-7 px-0">
+                    <div class="px-4 py-5 bg-white">
+                      <div class="col" id="user_model_details">
+                        <h4 class="text-center text-secondary mt-5"><i class="ti-info-alt"></i> Select a user to start a conversation.</h4>
+                      </div>
+
+
+
+                    </div>
+                  </div>
+
                 </div>
+              </div>
             </div>
 
-           
 
-           
-
-
-            
-
-            
-
-        </div> <!-- .content -->
-    </div><!-- /#right-panel -->
-
-    <!-- Right Panel -->
-
-    <script src="vendors/jquery/dist/jquery.min.js"></script>
-    <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
-    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="assets/js/main.js"></script>
+          </div>
+        </div>
+      </div>
 
 
-    <script src="vendors/chart.js/dist/Chart.bundle.min.js"></script>
-    <script src="assets/js/dashboard.js"></script>
-    <script src="assets/js/widgets.js"></script>
-    <script src="vendors/jqvmap/dist/jquery.vmap.min.js"></script>
-    <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-    <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <!-- <script>
+    </div>
+    <!-- End Chat Content  -->
+
+    <!-- Start GroupChat Content -->
+    <div id="group_chat_dialog" title="Group Chat (Announcements)">
+      <div id="group_chat_history" style="height:400px; border:1px solid #ccc; overflow-y: scroll; margin-bottom:24px; padding:16px;">
+
+      </div>
+      <div class="form-group">
+        <div class="chat_message_area">
+          <div id="group_chat_message" contenteditable class="form-control">
+
+          </div>
+          <div class="image_upload">
+            <form id="uploadImage" method="post" action="../app/ajax_chat/upload.php">
+              <label class="float-right" for="uploadFile"><i class="ti-cloud-up"></i></label>
+              <input style="opacity: 0;" type="file" name="uploadFile" id="uploadFile" accept=".jpg, .png" />
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" align="right">
+        <button type="button" name="send_group_chat" id="send_group_chat" class="btn btn-info btn-sm rounded"><i class="ti-location-arrow"></i> Send</button>
+      </div>
+    </div>
+    <!-- End GroupChat Content -->
+
+  </div><!-- /#right-panel -->
+
+  <!-- Right Panel -->
+
+  <script src="vendors/jquery/dist/jquery.min.js"></script>
+  <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
+  <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+
+  <script src="vendors/chart.js/dist/Chart.bundle.min.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+  <script src="assets/js/widgets.js"></script>
+  <script src="vendors/jqvmap/dist/jquery.vmap.min.js"></script>
+  <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+  <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+  <!-- <script>
         (function($) {
             "use strict";
 
@@ -487,7 +223,215 @@ input::placeholder {
         })(jQuery);
     </script> -->
 
+  <script>
+    $(document).ready(function() {
 
+      fetch_user();
+
+      setInterval(function() {
+        update_last_activity();
+        fetch_user();
+        update_chat_history_data();
+        fetch_group_chat_history();
+      }, 5000);
+
+      function fetch_user() {
+        $.ajax({
+          url: "../app/ajax_chat/fetch_user.php",
+          method: "POST",
+          success: function(data) {
+            $('#user_details').html(data);
+          }
+        })
+      }
+
+      function update_last_activity() {
+        $.ajax({
+          url: "../app/ajax_chat/update_last_activity.php",
+          success: function() {
+
+          }
+        })
+      }
+
+      function make_chat_dialog_box(to_user_id, to_user_name) {
+        var modal_content = '<div id="user_dialog_' + to_user_id + '" class="user_dialog" title="You have chat with ' + to_user_name + '">';
+        modal_content += '<div style="height:400px; border:1px solid #ccc; overflow-y: scroll; margin-bottom:24px; padding:16px;" class="chat_history" data-touserid="' + to_user_id + '" id="chat_history_' + to_user_id + '">';
+        modal_content += fetch_user_chat_history(to_user_id);
+        modal_content += '</div>';
+        modal_content += '<div class="form-group">';
+        modal_content += '<textarea name="chat_message_' + to_user_id + '" id="chat_message_' + to_user_id + '" class="form-control chat_message"></textarea>';
+        modal_content += '</div><div class="form-group" align="right">';
+        modal_content += '<button type="button" name="send_chat" id="' + to_user_id + '" class="btn btn-info send_chat rounded"><i class="ti-location-arrow"></i> Send</button></div></div>';
+        $('#user_model_details').html(modal_content);
+      }
+
+      $(document).on('click', '.start_chat', function() {
+        var to_user_id = $(this).data('touserid');
+        var to_user_name = $(this).data('tousername');
+        make_chat_dialog_box(to_user_id, to_user_name);
+        // $("#user_dialog_" + to_user_id).dialog({
+        //   autoOpen: false,
+        //   width: 400
+        // });
+        $('#user_dialog_' + to_user_id).dialog('open');
+        $('#chat_message_' + to_user_id).emojioneArea({
+          pickerPosition: "top",
+          toneStyle: "bullet"
+        });
+      });
+
+      $(document).on('click', '.send_chat', function() {
+        var to_user_id = $(this).attr('id');
+        var chat_message = $.trim($('#chat_message_' + to_user_id).val());
+        if (chat_message != '') {
+          $.ajax({
+            url: "../app/ajax_chat/insert_chat.php",
+            method: "POST",
+            data: {
+              to_user_id: to_user_id,
+              chat_message: chat_message
+            },
+            success: function(data) {
+              //$('#chat_message_'+to_user_id).val('');
+              var element = $('#chat_message_' + to_user_id).emojioneArea();
+              element[0].emojioneArea.setText('');
+              $('#chat_history_' + to_user_id).html(data);
+            }
+          })
+        } else {
+          alert('Type something');
+        }
+      });
+
+      function fetch_user_chat_history(to_user_id) {
+        $.ajax({
+          url: "../app/ajax_chat/fetch_user_chat_history.php",
+          method: "POST",
+          data: {
+            to_user_id: to_user_id
+          },
+          success: function(data) {
+            $('#chat_history_' + to_user_id).html(data);
+          }
+        })
+      }
+
+      function update_chat_history_data() {
+        $('.chat_history').each(function() {
+          var to_user_id = $(this).data('touserid');
+          fetch_user_chat_history(to_user_id);
+        });
+      }
+
+      $(document).on('click', '.ui-button-icon', function() {
+        $('.user_dialog').dialog('destroy').remove();
+        $('#is_active_group_chat_window').val('no');
+      });
+
+      $(document).on('focus', '.chat_message', function() {
+        var is_type = 'yes';
+        $.ajax({
+          url: "../app/ajax_chat/update_is_type_status.php",
+          method: "POST",
+          data: {
+            is_type: is_type
+          },
+          success: function() {
+
+          }
+        })
+      });
+
+      $(document).on('blur', '.chat_message', function() {
+        var is_type = 'no';
+        $.ajax({
+          url: "../app/ajax_chat/update_is_type_status.php",
+          method: "POST",
+          data: {
+            is_type: is_type
+          },
+          success: function() {
+
+          }
+        })
+      });
+
+      // === Group Chat ===
+      $('#group_chat_dialog').dialog({
+        autoOpen: false,
+        width: 400
+      });
+
+      $('#group_chat').click(function() {
+        $('#group_chat_dialog').dialog('open');
+        $('#is_active_group_chat_window').val('yes');
+        fetch_group_chat_history();
+      });
+
+      $('#send_group_chat').click(function() {
+        var chat_message = $.trim($('#group_chat_message').html());
+        var action = 'insert_data';
+        if (chat_message != '') {
+          $.ajax({
+            url: "../app/ajax_chat/group_chat.php",
+            method: "POST",
+            data: {
+              chat_message: chat_message,
+              action: action
+            },
+            success: function(data) {
+              $('#group_chat_message').html('');
+              $('#group_chat_history').html(data);
+            }
+          })
+        } else {
+          alert('Type something');
+        }
+      });
+
+      function fetch_group_chat_history() {
+        var group_chat_dialog_active = $('#is_active_group_chat_window').val();
+        var action = "fetch_data";
+        if (group_chat_dialog_active == 'yes') {
+          $.ajax({
+            url: "../app/ajax_chat/group_chat.php",
+            method: "POST",
+            data: {
+              action: action
+            },
+            success: function(data) {
+              $('#group_chat_history').html(data);
+            }
+          })
+        }
+      }
+
+      $('#uploadFile').on('change', function() {
+        $('#uploadImage').ajaxSubmit({
+          target: "#group_chat_message",
+          resetForm: true
+        });
+      });
+
+      $(document).on('click', '.remove_chat', function() {
+        var chat_message_id = $(this).attr('id');
+        if (confirm("Are you sure you want to remove this chat?")) {
+          $.ajax({
+            url: "../app/ajax_chat/remove_chat.php",
+            method: "POST",
+            data: {
+              chat_message_id: chat_message_id
+            },
+            success: function(data) {
+              update_chat_history_data();
+            }
+          })
+        }
+      });
+
+    });
+  </script>
 
 </body>
 

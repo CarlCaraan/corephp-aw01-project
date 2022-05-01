@@ -127,7 +127,7 @@ include("../classes/User.php");
 
                       <div class="bg-gray px-4 py-2 bg-light">
                         <input type="hidden" id="is_active_group_chat_window" value="no" />
-                        <button type="button" name="group_chat" id="group_chat" class="btn btn-info btn-sm float-right"><i class="ti-crown"></i> Group Chat</button>
+                        <button type="button" name="group_chat" id="group_chat" class="btn btn-info btn-sm float-right"><i class="ti-crown"></i> Moderators</button>
                         <p class="h5 mb-0 py-1">Recent</p>
                       </div>
 
@@ -165,7 +165,7 @@ include("../classes/User.php");
     <!-- End Chat Content  -->
 
     <!-- Start GroupChat Content -->
-    <div id="group_chat_dialog" title="Group Chat Window (Admin Only)">
+    <div id="group_chat_dialog" title="Group Chat (Announcements)">
       <div id="group_chat_history" style="height:400px; border:1px solid #ccc; overflow-y: scroll; margin-bottom:24px; padding:16px;">
 
       </div>

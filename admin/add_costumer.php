@@ -130,12 +130,12 @@ include("../classes/User.php");
                             </div><br />
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <label for="first_name" class="control-label mb-1">First Name*</label>
+                                    <label for="first_name" class="control-label mb-1">First Name<span class="text-danger font-weight-bold">*</span></label>
                                     <input id="first_name" name="first_name" type="text" class="form-control" placeholder="First Name">
                                 </div>
 
                                 <div class="col-sm-3">
-                                    <label for="last_name" class="control-label mb-1">Last Name*</label>
+                                    <label for="last_name" class="control-label mb-1">Last Name<span class="text-danger font-weight-bold">*</span></label>
                                     <input id="last_name" name="last_name" type="text" class="form-control" placeholder="Last Name">
                                 </div>
 
@@ -167,7 +167,7 @@ include("../classes/User.php");
                                     <input id="address" name="address" type="text" class="form-control" placeholder="Permanent Address">
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="email" class="control-label mb-1">Email Address*</label>
+                                    <label for="email" class="control-label mb-1">Email Address<span class="text-danger font-weight-bold">*</span></label>
                                     <input id="email" name="email" type="text" class="form-control" placeholder="Email Address">
                                 </div>
                             </div>
@@ -178,7 +178,7 @@ include("../classes/User.php");
                                     <input id="dob" name="dob" type="date" class="form-control" placeholder="Birthday">
                                 </div>
                                 <div class="col-sm-4">
-                                    <label for="mobile" class="control-label mb-1">Telephone/Mobile Number</label>
+                                    <label for="mobile" class="control-label mb-1">Telephone/Mobile Number<span class="text-danger font-weight-bold">*</span></label>
                                     <input id="mobile" name="mobile" type="text" class="form-control" placeholder="Telephone/Mobile Number">
                                 </div>
                             </div>
