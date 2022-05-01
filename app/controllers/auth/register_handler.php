@@ -95,7 +95,7 @@ if (isset($_POST['register_button'])) {
         $mail->Port = '587';                                //Sets the default SMTP server port
         $mail->SMTPAuth = true;                            //Sets SMTP authentication. Utilizes the Username and Password variables
         $mail->Username = 'bannedefused3@gmail.com';                    //Sets SMTP username
-        $mail->Password = '0639854227101msdcfredsw';                    //Sets SMTP password
+        $mail->Password = '';                    //Sets SMTP password
         $mail->SMTPSecure = 'tls';                            //Sets connection prefix. Options are "", "ssl" or "tls"
         $mail->From = $_POST["reg_email"];                    //Sets the From email address for the message
         $mail->FromName = "Loaning System";                //Sets the From name of the message
