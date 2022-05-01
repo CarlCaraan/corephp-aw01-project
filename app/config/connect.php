@@ -169,7 +169,7 @@ function fetch_group_chat_history($connect)
 				$user_name = '<b class="text-white">You</b>';
 			} else {
 				$chat_message = $row["chat_message"];
-				$user_name = '<button type="button" class="btn btn-secondary btn-sm rounded remove_chat float-right" id="' . $row['chat_message_id'] . '">x</button>&nbsp;<b class="text-white">You</b>';
+				$user_name = '<button type="button" class="btn btn-secondary btn-sm rounded remove_chat float-right" id="' . $row['chat_message_id'] . '">x</button><b class="text-white">You</b>';
 			}
 
 			$dynamic_background = 'background-color:#007BFF;';
