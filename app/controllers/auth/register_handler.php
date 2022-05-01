@@ -87,6 +87,7 @@ if (isset($_POST['register_button'])) {
     //-- Start of Error Validation --//
     if (empty($error_array)) { //If No Error Statement
 
+        // START PHP MAILER
         require 'classes/class.phpmailer.php';
         $mail = new PHPMailer;
         $mail->IsSMTP();                                //Sets Mailer to send message using SMTP
@@ -126,6 +127,7 @@ if (isset($_POST['register_button'])) {
         } else {
             $error = '<label class="text-danger">There is an Error</label>';
         }
+        // END PHP MAILER
 
 
 
