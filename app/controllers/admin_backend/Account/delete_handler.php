@@ -37,7 +37,7 @@ if (isset($_GET['id'])) {
                 Hi " . $user_details['first_name'] . " " . $user_details['first_name'] . ",
                 </p>
 				<p style='color: black;'>
-				Your account has been closed. Due to 1 Year of inactivity <br />
+				Your account has been closed. Due to your request. <br />
                 Contact Us: loremipsum@gmail.com / support.loaning-system@gmail.com
 				</p>
                 <br/>
