@@ -72,7 +72,7 @@ require 'app/controllers/auth/register_handler.php';
 						<?php if (in_array("Your passwords do not match<br>", $error_array)) echo "Your passwords do not match<br>";
 						else if (in_array("Your password can only contain english characters or numbers<br>", $error_array)) echo "Your password can only contain english characters or numbers<br>";
 						else if (in_array("Your password must be between 5 and 30 characters<br>", $error_array)) echo "Your password must be between 5 and 30 characters<br>"; ?>
-						<?php if (in_array("<span>Wait the approval of your account. Thank You!</span><br>", $error_array)) echo "<span>Wait the approval of your account. Thank You!</span><br>"; ?>
+						<?php if (in_array("<span>Check Your Email and Wait the approval of your account. Thank You!</span><br>", $error_array)) echo "<span>Check Your Email and Wait the approval of your account. Thank You!</span><br>"; ?>
 					</p>
 					<!-- End Validation Message -->
 
