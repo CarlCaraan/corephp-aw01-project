@@ -7,7 +7,7 @@
                 </button>
                 <a class="navbar-brand" href="#">
                     <!-- <img src="images/logo.png" alt="Logo"> -->
-                    Branch Manager
+                    Welcome
                 </a>
                 <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
             </div>
