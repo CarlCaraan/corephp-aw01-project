@@ -9,11 +9,17 @@ include("../classes/User.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>My Profile | App</title>
+    <title>
+        <?php
+        $fullname_obj = new User($con, $_SESSION['username']);
+        echo $fullname_obj->getFirstAndLastName();
+        ?> | App
+    </title>
     <meta name="description" content="WEB AND DATABASE">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--   <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="icon" href="../resources/img/login.png">
+    <!-- <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico"> -->
 
     <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">

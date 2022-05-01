@@ -74,7 +74,7 @@ function fetch_user_chat_history($from_user_id, $to_user_id, $connect)
 			-webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
 			-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
 		' . $dynamic_background . '">
-			<p style="' . $timestamp_color . '">' . $user_name . ' - ' . $chat_message . '
+			<p style="' . $timestamp_color . '">' . $user_name . ' <br/> ' . $chat_message . '
 				<div align="right">
 					<small style="' . $timestamp_color . '">- ' . $row['timestamp'] . '</small>
 				</div>
@@ -192,7 +192,7 @@ function fetch_group_chat_history($connect)
 			-webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
 			-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
 		' . $dynamic_background . '">
-			<p style="' . $timestamp_color . '">' . $user_name . ' - ' . $chat_message . ' 
+			<p style="' . $timestamp_color . '">' . $user_name . ' <br/> ' . $chat_message . ' 
 				<div align="right">
 					<small style="' . $timestamp_color . '">- ' . $row['timestamp'] . '</small>
 				</div>
