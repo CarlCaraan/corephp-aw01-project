@@ -4,10 +4,23 @@
 
 require('../config/connect.php');
 
-$query = "
-SELECT * FROM users INNER JOIN personal ON users.id = personal.user_id 
-WHERE id != '" . $_SESSION['id'] . "' AND status='Verified'
-";
+// Fetch User Type
+$get_user_details = mysqli_query($con, "SELECT * FROM users WHERE id='" . $_SESSION['id'] . "'");
+$current_user_details = mysqli_fetch_array($get_user_details);
+
+// Staff can chat only the Branch Manager
+if ($current_user_details['usertype'] == "Staff") {
+	$query = "
+		SELECT * FROM users INNER JOIN personal ON users.id = personal.user_id 
+		WHERE id != '" . $_SESSION['id'] . "' AND status='Verified' AND usertype='Branch Manager'
+	";
+} else {
+	$query = "
+		SELECT * FROM users INNER JOIN personal ON users.id = personal.user_id 
+		WHERE id != '" . $_SESSION['id'] . "' AND status='Verified'
+	";
+}
+
 
 $statement = $connect->prepare($query);
 
