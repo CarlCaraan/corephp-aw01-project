@@ -11,6 +11,7 @@ if (mysqli_connect_errno()) {
 	echo "Failed to connect: " . mysqli_connect_errno();
 }
 
+// ========= Start Chat Functions =========
 function fetch_user_last_activity($user_id, $connect)
 {
 	$query = "
@@ -203,3 +204,4 @@ function fetch_group_chat_history($connect)
 	$output .= '</ul>';
 	return $output;
 }
+// ========= End Chat Functions =========
