@@ -40,7 +40,7 @@ if (isset($_GET['id'])) {
 		<html>
 			<body>
                 <p>
-                Hi " . $user_details['first_name'] . " " . $user_details['first_name'] . ",
+                Hi " . $user_details['first_name'] . " " . $user_details['last_name'] . ",
                 </p>
 				<p style='color: black;'>
 				Your account has been rejected. You didn't pass the minimum requirements <br />

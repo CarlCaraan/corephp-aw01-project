@@ -39,7 +39,7 @@ if (isset($_GET['id'])) {
 		<html>
 			<body>
                 <p>
-                Hi " . $user_details['first_name'] . " " . $user_details['first_name'] . ",
+                Hi " . $user_details['first_name'] . " " . $user_details['last_name'] . ",
                 </p>
 				<p style='color: black;'>
 				Your account has been approved. You can now login with your account
