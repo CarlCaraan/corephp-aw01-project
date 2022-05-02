@@ -246,7 +246,7 @@ include("../classes/User.php");
                                                 <div class="modal-body">
                                                     <p align="center">Are you sure? You want to approved this Account?</p>
                                                     <div class="modal-footer">
-                                                        <a href="../app/controllers/admin_backend/Account/approve_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
+                                                        <a href="../app/controllers/branch_manager_backend/Account/approve_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
                                                     </div>
                                                 </div>
@@ -269,7 +269,7 @@ include("../classes/User.php");
                                                 <div class="modal-body">
                                                     <p align="center">Are you sure? You want to Reject this Account?</p>
                                                     <div class="modal-footer">
-                                                        <a href="../app/controllers/admin_backend/Account/reject_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
+                                                        <a href="../app/controllers/branch_manager_backend/Account/reject_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
                                                     </div>
                                                 </div>
@@ -292,7 +292,7 @@ include("../classes/User.php");
                                                 <div class="modal-body">
                                                     <p align="center">Are you sure? You want to Delete this Account?</p>
                                                     <div class="modal-footer">
-                                                        <a href="../app/controllers/admin_backend/Account/delete_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
+                                                        <a href="../app/controllers/branch_manager_backend/Account/delete_handler.php?id=<?php echo $row['user_id']; ?>" class="btn btn-secondary">YES</a>
                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
                                                     </div>
                                                 </div>

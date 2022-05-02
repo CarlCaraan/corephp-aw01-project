@@ -124,7 +124,7 @@ include("../classes/User.php");
 
                         <!--   </div> -->
                         <!-- form -->
-                        <form action="../app/controllers/admin_backend/Customer/add_customer_handler.php" method="POST" enctype="multipart/form-data">
+                        <form action="../app/controllers/branch_manager_backend/Customer/add_customer_handler.php" method="POST" enctype="multipart/form-data">
                             <div class="card-header">
                                 <strong class="card-title">Personal Information</strong>
                             </div><br />
