@@ -24,6 +24,8 @@ include("../classes/User.php");
     <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="vendors/jqvmap/dist/jqvmap.min.css">
 
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="../resources/css/toastr.min.css">
 
     <link rel="stylesheet" href="assets/css/style.css">
 
@@ -231,6 +233,24 @@ include("../classes/User.php");
     <script src="vendors/jqvmap/dist/jquery.vmap.min.js"></script>
     <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+
+    <!-- Toastr JS -->
+    <script src="../resources/js/toastr.min.js"></script>
+    <script>
+        <?php if (isset($_SESSION['success'])) : ?>
+            toastr.success("<?php echo flash('success'); ?>");
+        <?php endif ?>
+        <?php if (isset($_SESSION['error'])) : ?>
+            toastr.error("<?php echo flash('error'); ?>");
+        <?php endif ?>
+        <?php if (isset($_SESSION['warning'])) : ?>
+            toastr.warning("<?php echo flash('warning'); ?>");
+        <?php endif ?>
+        <?php if (isset($_SESSION['info'])) : ?>
+            toastr.info("<?php echo flash('info'); ?>");
+        <?php endif ?>
+    </script>
+
     <!-- <script>
         (function($) {
             "use strict";

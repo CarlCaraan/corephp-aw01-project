@@ -38,6 +38,10 @@ include("../classes/User.php");
   <script src="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
   <!-- End CHAT CSS AND SCRIPTS -->
+
+  <!-- Toastr CSS -->
+  <link rel="stylesheet" href="../resources/css/toastr.min.css">
+
   <style>
     ::-webkit-scrollbar {
       width: 5px;
@@ -204,6 +208,24 @@ include("../classes/User.php");
   <script src="vendors/jqvmap/dist/jquery.vmap.min.js"></script>
   <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
   <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+
+  <!-- Toastr JS -->
+  <script src="../resources/js/toastr.min.js"></script>
+  <script>
+    <?php if (isset($_SESSION['success'])) : ?>
+      toastr.success("<?php echo flash('success'); ?>");
+    <?php endif ?>
+    <?php if (isset($_SESSION['error'])) : ?>
+      toastr.error("<?php echo flash('error'); ?>");
+    <?php endif ?>
+    <?php if (isset($_SESSION['warning'])) : ?>
+      toastr.warning("<?php echo flash('warning'); ?>");
+    <?php endif ?>
+    <?php if (isset($_SESSION['info'])) : ?>
+      toastr.info("<?php echo flash('info'); ?>");
+    <?php endif ?>
+  </script>
+
   <!-- <script>
         (function($) {
             "use strict";
