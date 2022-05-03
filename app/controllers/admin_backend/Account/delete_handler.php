@@ -7,6 +7,7 @@ if (isset($_GET['id'])) {
 
     $sql = "DELETE FROM users WHERE id='$id'";
     $sql1 = "DELETE FROM personal WHERE user_id='$id'";
+    $sql2 = "DELETE FROM chat WHERE from_user_id='$id'";
 
     $personal_query = mysqli_query($con, "SELECT * FROM personal WHERE user_id='$id'");
     $personal = mysqli_fetch_array($personal_query);
@@ -56,7 +57,7 @@ if (isset($_GET['id'])) {
     }
     // END PHP MAILER
 
-    if ($con->query($sql) === TRUE && $con->query($sql1) === TRUE) {
+    if ($con->query($sql) === TRUE && $con->query($sql1) === TRUE && $con->query($sql2) === TRUE) {
         unlink('../../../../resources/img/uploads/' . $personal['image']);
         flash("success", "User Deleted Succesfully!");
 
