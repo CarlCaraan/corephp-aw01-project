@@ -125,7 +125,7 @@ include("../classes/User.php");
 
                 <div class="row rounded-lg overflow-hidden shadow">
                   <!-- Users box-->
-                  <div class="col-5 px-0">
+                  <div class="col-xl-5 px-0">
                     <div class="bg-white">
 
                       <div class="bg-gray px-4 py-2 bg-light">
@@ -143,7 +143,7 @@ include("../classes/User.php");
                   </div>
 
                   <!-- Chat Box-->
-                  <div class="col-7 px-0">
+                  <div class="col-xl-7 px-0">
                     <div class="px-4 py-5 bg-white">
                       <div class="col" id="user_model_details">
                         <h4 class="text-center text-secondary mt-5"><i class="ti-info-alt"></i> Select a user to start a conversation.</h4>
