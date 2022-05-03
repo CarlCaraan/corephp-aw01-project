@@ -3,6 +3,7 @@ require("../app/config/connect.php");
 include("../classes/User.php");
 ?>
 
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -62,6 +63,7 @@ include("../classes/User.php");
             </div>
         </div>
 
+        <!-- === Start Content === -->
         <div class="content mt-3">
 
             <div class="col-sm-12">
@@ -77,9 +79,12 @@ include("../classes/User.php");
             <div class="col-sm-6 col-lg-4">
                 <div class="card text-white bg-flat-color-1">
                     <div class="card-body pb-0">
-
+                        <?php
+                        $users_details_query = mysqli_query($con, "SELECT * FROM users");
+                        $count_users = mysqli_num_rows($users_details_query);
+                        ?>
                         <h4 class="mb-0">
-                            <span class="count"><img src="../img/login.png"></span>
+                            <span class="count"><?php echo $count_users; ?></span>
                         </h4>
                         <p class="text-light">Users</p>
 
@@ -96,8 +101,12 @@ include("../classes/User.php");
             <div class="col-sm-6 col-lg-4">
                 <div class="card text-white bg-flat-color-2">
                     <div class="card-body pb-0">
+                        <?php
+                        $customer_details_query = mysqli_query($con, "SELECT * FROM users WHERE usertype='Staff'");
+                        $count_customers = mysqli_num_rows($customer_details_query);
+                        ?>
                         <h4 class="mb-0">
-                            <span class="count">10468</span>
+                            <span class="count"><?php echo $count_customers; ?></span>
                         </h4>
                         <p class="text-light">Total Customer</p>
 
@@ -307,6 +316,7 @@ include("../classes/User.php");
 
 
         </div> <!-- .content -->
+        <!-- === End Content === -->
 
     </div><!-- /#right-panel -->
 
