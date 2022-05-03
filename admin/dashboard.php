@@ -30,6 +30,11 @@ include("../classes/User.php");
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="../resources/css/toastr.min.css">
+
+    <!-- Chat JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -346,6 +351,24 @@ include("../classes/User.php");
     <script src="assets/js/init-scripts/flot-chart/curvedLines.js"></script>
     <script src="assets/js/init-scripts/flot-chart/flot-tooltip/jquery.flot.tooltip.min.js"></script>
     <script src="assets/js/init-scripts/flot-chart/flot-chart-init.js"></script>
+
+    <!-- Toastr JS -->
+    <script src="../resources/js/toastr.min.js"></script>
+    <script>
+        <?php if (isset($_SESSION['success'])) : ?>
+            toastr.success("<?php echo flash('success'); ?>");
+        <?php endif ?>
+        <?php if (isset($_SESSION['error'])) : ?>
+            toastr.error("<?php echo flash('error'); ?>");
+        <?php endif ?>
+        <?php if (isset($_SESSION['warning'])) : ?>
+            toastr.warning("<?php echo flash('warning'); ?>");
+        <?php endif ?>
+        <?php if (isset($_SESSION['info'])) : ?>
+            toastr.info("<?php echo flash('info'); ?>");
+        <?php endif ?>
+    </script>
+
     <script>
         (function($) {
             "use strict";

@@ -30,6 +30,9 @@ include("../classes/User.php");
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="../resources/css/toastr.min.css">
+
+    <!-- Chat JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <style>
         ::-webkit-scrollbar {
             width: 5px;

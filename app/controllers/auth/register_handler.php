@@ -6,7 +6,9 @@ $email = "";
 $password = "";
 $usertype = "";
 $date = "";
+$date_time = "";
 $status = "Pending";
+$notif_message = "has account pending confirmation";
 $error_array = array();
 
 //-- Start Register Button --//
@@ -40,7 +42,7 @@ if (isset($_POST['register_button'])) {
 
 
     $date = date("Y-m-d"); //Current date
-
+    $date_time = date("Y-m-d H:i:s");
 
     //-- Start Email, Name, and Password Validation Message --//
     //Check if email is in valid format
@@ -105,21 +107,21 @@ if (isset($_POST['register_button'])) {
         $mail->IsHTML(true);                            //Sets message type to HTML				
         $mail->Subject = "support.loaning-system@gmail.com - Wait For your Approval";                //Sets the Subject of the message
         $mail->Body = "									
-		<html>
-			<body>
+        <html>
+        	<body>
                 <p>
                 Hi " . $_POST['reg_fname'] . " " . $_POST['reg_lname'] . ",
                 </p>
-				<p style='color: black;'>
-				Please wait 1-3 Business Days for approval of your account.
-				</p>
+        		<p style='color: black;'>
+        		Please wait 1-3 Business Days for approval of your account.
+        		</p>
                 <br/>
 
                 <small> ============================================ </small><br/>
                 <small> *** This is an automated message please do not reply. *** </small><br/>
                 <small> ============================================ </small>
-			</body>
-		</html>"; // Customize Html Template
+        	</body>
+        </html>"; // Customize Html Template
 
         if ($mail->Send()) //Send an Email. Return true on success or false on error
         {
@@ -163,10 +165,15 @@ if (isset($_POST['register_button'])) {
             $card_number = date("Y") . '-0' . $user_id;
         }
 
+        // Insert Personal Data
         $query1 = mysqli_query($con, "INSERT INTO personal VALUES (
 			'', '$user_id','','','','','','$card_number','','','','','','','','','','','',''
 		)");
 
+        // Insert Notifications
+        $query2 = mysqli_query($con, "INSERT INTO notifications (id, fname,lname, notif_message, datetime, seen_status) VALUES (
+			'', '$first_name', '$last_name', '$notif_message', '$date_time', '0'
+		)");
 
         //Register Successful Message
         array_push($error_array, "<span>Check Your Email and Wait the approval of your account. Thank You!</span><br>");

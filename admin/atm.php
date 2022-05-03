@@ -236,6 +236,8 @@ include("../classes/User.php");
     <script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
     <script src="assets/js/init-scripts/data-table/datatables-init.js"></script>
+    <script src="assets/js/widgets.js"></script>
+
     <!-- <script>
         (function($) {
             "use strict";
