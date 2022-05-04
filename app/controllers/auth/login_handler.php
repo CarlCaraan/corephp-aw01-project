@@ -11,15 +11,17 @@ if (isset($_POST['login_button'])) {
     $check_login_query = mysqli_num_rows($check_database_query);
 
     // Verify Status and Usertype
-    $check_data_query = mysqli_query($con, "SELECT * FROM users WHERE email='$email'");
-    $row = mysqli_fetch_array($check_data_query);
-    $status = $row['status'];
-    $usertype = $row['usertype'];
-    $id = $row['id'];
+    if ($check_login_query == 1) {
+        $check_data_query = mysqli_query($con, "SELECT * FROM users WHERE email='$email'");
+        $row = mysqli_fetch_array($check_data_query);
+        $status = $row['status'];
+        $usertype = $row['usertype'];
+        $id = $row['id'];
+    }
 
-    if ($status == "Pending") {
+    if ($check_login_query == 1 && $status == "Pending") {
         array_push($error_array, "Your account is not yet approved!<br>");
-    } else if ($status == "Rejected") {
+    } else if ($check_login_query == 1 && $status == "Rejected") {
         array_push($error_array, "Your account has been rejected!<br>");
     } else if ($check_login_query == 1 && $usertype == "Admin") { //Login query
         $row = mysqli_fetch_array($check_database_query);

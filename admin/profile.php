@@ -241,9 +241,11 @@ include("../classes/User.php");
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <img class="mt-2" src="../resources/img/uploads/<?php $avatar_obj = new User($con, $userLoggedIn);
-                                                                                    echo ($avatar_obj->getAvatar() != NULL) ?
-                                                                                        $avatar_obj->getAvatar() : "/default.jpg";
+                                    <img class="mt-2" src="../resources/img/uploads/<?php if (!empty($row['image'])) {
+                                                                                        echo $row['image'];
+                                                                                    } else {
+                                                                                        echo "/default.jpg";
+                                                                                    }
                                                                                     ?>" width="100px" height="100px" alt="avatar">
                                 </div>
                             </div><br />
@@ -384,9 +386,11 @@ include("../classes/User.php");
                                     <input class="btn btn-sm btn-secondary text-white mt-2" type="submit" name="delete_image" value="Remove Image" />
                                 </div>
                                 <div class="col-sm-6">
-                                    <img id="show_image" class="mt-2" src="../resources/img/uploads/<?php $avatar_obj = new User($con, $userLoggedIn);
-                                                                                                    echo ($avatar_obj->getAvatar() != NULL) ?
-                                                                                                        $avatar_obj->getAvatar() : "/default.jpg";
+                                    <img id="show_image" class="mt-2" src="../resources/img/uploads/<?php if (!empty($row['image'])) {
+                                                                                                        echo $row['image'];
+                                                                                                    } else {
+                                                                                                        echo "/default.jpg";
+                                                                                                    }
                                                                                                     ?>" width="100px" height="100px" alt="avatar">
                                 </div>
                             </div>
