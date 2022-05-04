@@ -100,7 +100,7 @@ include("../classes/User.php");
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>My Profile
+                        <h1>My Profile<br /><br />
                             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#profile"><i class="fa fa-plus"> EDIT PROFILE</i>
                             </button>
                             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#password"><i class="fa fa-plus"> CHANGE PASSWORD</i>
