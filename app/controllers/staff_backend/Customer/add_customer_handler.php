@@ -204,7 +204,7 @@ if (isset($_POST['add_customer'])) {
             $card_number = date("Y") . '-0' . $user_id;
         }
 
-        $personal_query = mysqli_query($con, "INSERT INTO personal (personal_id ,user_id, middle_name, category, address, dob, mobile,card_number, mother_name, father_name, spouse_name, contact_person,
+        $personal_query = mysqli_query($con, "INSERT INTO personal (personal_id ,user_id, middle_name, category_id, address, dob, mobile,card_number, mother_name, father_name, spouse_name, contact_person,
             contact_number, s_contact_number, company_affiliated, company_address,company_number, position, work_status, image)
             VALUES ('','$user_id', '$middle_name', '$category','$address','$dob','$mobile','$card_number','$mother_name','$father_name' ,'$spouse_name' ,'$contact_person','$contact_number','$s_contact_number'
             ,'$company_affiliated','$company_address','$company_number','$position','$work_status','$file_name')");

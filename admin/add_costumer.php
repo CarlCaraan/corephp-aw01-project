@@ -163,11 +163,13 @@ include("../classes/User.php");
                                             // output data of each row
                                             while ($row = $result->fetch_assoc()) {
                                         ?>
-                                                <option value="<?php echo $row['category'] ?>"><?php echo $row['category'] ?></option>
-                                        <?php
+                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['category'] ?></option>
+                                            <?php
                                             }
                                         } else {
-                                            echo "0 results";
+                                            ?>
+                                            <option value="0">No Results</option>
+                                        <?php
                                         }
                                         $con->close();
                                         ?>

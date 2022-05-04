@@ -157,9 +157,24 @@ include("../classes/User.php");
                                     <label for="category" class="control-label mb-1">Categories</label>
                                     <select name="category" id="category" class="form-control">
                                         <option value="0">Please select</option>
-                                        <option value="ATM">ATM</option>
-                                        <option value="SPS">SPS</option>
-                                        <option value="SPSV1">SPSV1</option>
+                                        <?php
+                                        $sql = "SELECT * FROM categories";
+                                        $result = $con->query($sql);
+
+                                        if ($result->num_rows > 0) {
+                                            // output data of each row
+                                            while ($row = $result->fetch_assoc()) {
+                                        ?>
+                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['category'] ?></option>
+                                            <?php
+                                            }
+                                        } else {
+                                            ?>
+                                            <option value="0">No Results</option>
+                                        <?php
+                                        }
+                                        $con->close();
+                                        ?>
                                     </select>
                                 </div>
 
